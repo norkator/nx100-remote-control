@@ -1,3 +1,4 @@
+from module import Utils
 import socket
 
 # https://drive.google.com/drive/folders/178NiGW2us9qwGYyyPQLYwU0fMyYPVp0x
@@ -27,7 +28,7 @@ def exec_single_command(command):
         return
 
     # command request
-    cmd_data_length = command_data_length(command)
+    cmd_data_length = Utils.command_data_length(command)
     command_request = "HOSTCTRL_REQUEST " + command.name + " " + str(cmd_data_length) + CRLF
     print('Sending command: ' + command_request)
     client.send(command_request.encode())
@@ -53,26 +54,3 @@ def exec_single_command(command):
 # exec array of command objects
 def exec_multiple_commands(commands):
     print('No implementation')
-
-
-# --------------------------------------------------------------------------------
-# Helpers
-
-# return byte length of command
-def utf8len(s):
-    return len(s.encode('utf-8'))
-
-
-# get byte length for command data
-def command_data_length(command):
-    if len(command.data) is 0:
-        return 0
-    else:
-        utf8len(command.data + CR)
-
-
-# just print some response details
-def print_response_details(command_response):
-    command_response_len = len(command_response)
-    print("Command response length: %d" % command_response_len)
-    print("Command response: " + command_response)
