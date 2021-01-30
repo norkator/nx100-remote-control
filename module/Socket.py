@@ -1,7 +1,6 @@
 from module import Utils
 import socket
 
-# https://drive.google.com/drive/folders/178NiGW2us9qwGYyyPQLYwU0fMyYPVp0x
 # NX100 robot parameters
 nx100_address = "192.168.2.28"
 nx100_port = 80
