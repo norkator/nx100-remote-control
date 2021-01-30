@@ -11,7 +11,7 @@ def command_data_length(command):
     if len(command.data) is 0:
         return 0
     else:
-        utf8len(command.data + CR)
+        return utf8len(command.data + CR)
 
 
 # just print some response details

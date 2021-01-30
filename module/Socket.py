@@ -40,7 +40,7 @@ def exec_single_command(command):
         return
 
     # command data request
-    command_data_request = command.data
+    command_data_request = command.data + (CR if len(command.data) > 0 else '')
     client.send(command_data_request.encode())
     response = client.recv(4096)
     command_data_response = repr(response)

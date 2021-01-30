@@ -37,3 +37,12 @@ def read_status():
     print(data_1)
     print(data_2)
     # Todo, parse binary data
+
+
+# Turns HOLD ON/OFF
+def write_hold(command):
+    if command not in '1' and command not in '0':
+        print('[E] hold command can only be 1 (on) or 0 (off)')
+        return
+    request_alarms = Socket.exec_single_command(Command.Command("HOLD", command))
+    Utils.print_response_details(request_alarms)
