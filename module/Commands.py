@@ -14,8 +14,8 @@ def read_alarms():
 
 # Reads the current position in joint coordinate system
 def read_current_joint_coordinate_position():
-    request_alarms = Socket.exec_single_command(Command.Command("RPOSJ", ""))
-    Utils.print_response_details(request_alarms)
+    response_data = Socket.exec_single_command(Command.Command("RPOSJ", ""))
+    Utils.print_response_details(response_data)
     # Todo, write response parser
 
 
@@ -30,8 +30,8 @@ def read_current_specified_coordinate_system_position(coordinate_system):
 
 # Reads the status of mode, cycle, operation, alarm error, and servo
 def read_status():
-    request_alarms = Socket.exec_single_command(Command.Command("RSTATS", ""))
-    parts = request_alarms.replace('b\'', '').replace('\\r\'', '').split(',')
+    response_data = Socket.exec_single_command(Command.Command("RSTATS", ""))
+    parts = response_data.replace('b\'', '').replace('\\r\'', '').split(',')
     data_1 = Utils.decimal_to_binary(int(parts[0]))
     data_2 = Utils.decimal_to_binary(int(parts[1]))
     print(data_1)
@@ -44,5 +44,7 @@ def write_hold(command):
     if command not in '1' and command not in '0':
         print('[E] hold command can only be 1 (on) or 0 (off)')
         return
-    request_alarms = Socket.exec_single_command(Command.Command("HOLD", command))
-    Utils.print_response_details(request_alarms)
+    response_data = Socket.exec_single_command(Command.Command("HOLD", command))
+    Utils.print_response_details(response_data)
+    print('Command run failed!' if '0000' not in response_data else 'Command run successfully!')
+
