@@ -26,16 +26,28 @@ def exec_single_command(command):
         print('[E] Command start request response not ok!')
         return
 
-    # command
-    command_request = "HOSTCTRL_REQUEST " + command.name + " " + str(utf8len(command.name + CR)) + CRLF
+    # command request
+    cmd_data_length = command_data_length(command)
+    command_request = "HOSTCTRL_REQUEST " + command.name + " " + str(cmd_data_length) + CRLF
+    print('Sending command: ' + command_request)
     client.send(command_request.encode())
     response = client.recv(4096)
     command_response = repr(response)
+    if ('OK: ' + command.name) not in command_response:
+        client.close()
+        print('[E] Command request response not ok!')
+        return
+
+    # command data request
+    command_data_request = command.data
+    client.send(command_data_request.encode())
+    response = client.recv(4096)
+    command_data_response = repr(response)
 
     # close socket
     client.close()
 
-    return command_response
+    return command_data_response
 
 
 # exec array of command objects
@@ -49,6 +61,14 @@ def exec_multiple_commands(commands):
 # return byte length of command
 def utf8len(s):
     return len(s.encode('utf-8'))
+
+
+# get byte length for command data
+def command_data_length(command):
+    if len(command.data) is 0:
+        return 0
+    else:
+        utf8len(command.data + CR)
 
 
 # just print some response details
