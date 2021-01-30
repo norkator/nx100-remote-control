@@ -2,9 +2,6 @@ from module import Socket, Utils
 from objects import Command
 
 
-# commands = []
-# commands.append(Command.Command(""))
-
 # Reads the error alarm code
 def read_alarms():
     request_alarms = Socket.exec_single_command(Command.Command("RALARM", ""))
@@ -21,11 +18,13 @@ def read_current_joint_coordinate_position():
 
 # Reads the current position in a specified coordinate system.
 # The specification with or without external axis can be made
-def read_current_specified_coordinate_system_position(coordinate_system):
-    print('not implemented')
-    # request_alarms = Socket.exec_single_command(Command.Command("RPOSC", ""))
-    # Utils.print_response_details(request_alarms)
-    # Todo, implement coordinate commands, write response parser
+# coordinate_system = 0: Base coordinate, 1: Robot coordinate, 2: User coordinate 1...24
+def read_current_specified_coordinate_system_position(coordinate_system, include_external_axis='0'):
+    request_alarms = Socket.exec_single_command(
+        Command.Command("RPOSC", (coordinate_system + ' ' + include_external_axis))
+    )
+    Utils.print_response_details(request_alarms)
+    # Todo, write response parser
 
 
 # Reads the status of mode, cycle, operation, alarm error, and servo
@@ -71,3 +70,22 @@ def write_servo_power(command):
     response_data = Socket.exec_single_command(Command.Command("SVON", command))
     Utils.print_response_details(response_data)
     print('[E] command run failed!' if '0000' not in response_data else 'Command run successfully!')
+
+
+# Starts a job
+def write_start_job(job_name):
+    response_data = Socket.exec_single_command(Command.Command("START", job_name))
+    Utils.print_response_details(response_data)
+    print('[E] command run failed!' if '0000' not in response_data else 'Command run successfully!')
+
+
+# Moves a manipulator to a specified coordinate position in linear motion
+def write_linear_move(
+        motion_speed_selection, motion_speed, coordinate_specification,
+        x, y, z, tx, ty, tz,
+        d_10, d_11, d_12, d_13, d_14, d_15, d_16, d_17
+):
+    # response_data = Socket.exec_single_command(Command.Command("MOVL", ...))
+    # Utils.print_response_details(response_data)
+    # print('[E] command run failed!' if '0000' not in response_data else 'Command run successfully!')
+    print('not implemented')
