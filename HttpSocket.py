@@ -3,11 +3,11 @@ from objects import Command
 
 
 def run_commands():
-    commands = []
+    # commands = []
+    # commands.append(Command.Command(""))
 
-    commands.append(Command.Command(""))
-
-    Socket.exec_commands(commands)
+    command = Command.Command("RALARM")
+    Socket.exec_single_command(command)
 
 
 run_commands()

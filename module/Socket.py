@@ -5,23 +5,48 @@ import socket
 nx100_address = "192.168.2.28"
 nx100_port = 80
 
+CR = "\r"
 CRLF = "\r\n"
 
 
-def exec_commands(commands):
+# exec single command object
+def exec_single_command(command):
     client = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
 
     # connect the client
     client.connect((nx100_address, nx100_port))
 
-    # send some data
+    # start request
     start_request = "CONNECT Robot_access" + CRLF
     client.send(start_request.encode())
     response = client.recv(4096)
-    http_response = repr(response)
-    http_response_len = len(http_response)
-    print("Response length: %d" % http_response_len)
-    print(http_response)
+    start_response = repr(response)
+    if 'OK: NX Information Server' not in start_response:
+        client.close()
+        print('[E] Command start request response not ok!')
+        return
 
-    # Close socket
+    # command
+    command_request = "HOSTCTRL_REQUEST " + command.name + " " + str(utf8len(command.name + CR)) + CRLF
+    client.send(command_request.encode())
+    response = client.recv(4096)
+    command_response = repr(response)
+    command_response_len = len(command_response)
+    print("Command response length: %d" % command_response_len)
+    print("Command response: " + command_response)
+
+    # close socket
     client.close()
+
+
+# exec array of command objects
+def exec_multiple_commands(commands):
+    print('No implementation')
+
+
+# --------------------------------------------------------------------------------
+# Helpers
+
+# return byte length of command
+def utf8len(s):
+    return len(s.encode('utf-8'))
