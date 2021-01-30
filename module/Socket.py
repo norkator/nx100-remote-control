@@ -31,12 +31,11 @@ def exec_single_command(command):
     client.send(command_request.encode())
     response = client.recv(4096)
     command_response = repr(response)
-    command_response_len = len(command_response)
-    print("Command response length: %d" % command_response_len)
-    print("Command response: " + command_response)
 
     # close socket
     client.close()
+
+    return command_response
 
 
 # exec array of command objects
@@ -50,3 +49,10 @@ def exec_multiple_commands(commands):
 # return byte length of command
 def utf8len(s):
     return len(s.encode('utf-8'))
+
+
+# just print some response details
+def print_response_details(command_response):
+    command_response_len = len(command_response)
+    print("Command response length: %d" % command_response_len)
+    print("Command response: " + command_response)
