@@ -46,5 +46,28 @@ def write_hold(command):
         return
     response_data = Socket.exec_single_command(Command.Command("HOLD", command))
     Utils.print_response_details(response_data)
-    print('Command run failed!' if '0000' not in response_data else 'Command run successfully!')
+    print('[E] command run failed!' if '0000' not in response_data else 'Command run successfully!')
 
+
+# Resets an alarm of manipulator
+def write_reset():
+    response_data = Socket.exec_single_command(Command.Command("RESET", ""))
+    Utils.print_response_details(response_data)
+    print('[E] command run failed!' if '0000' not in response_data else 'Command run successfully!')
+
+
+# Cancels an error
+def write_cancel():
+    response_data = Socket.exec_single_command(Command.Command("CANCEL", ""))
+    Utils.print_response_details(response_data)
+    print('[E] command run failed!' if '0000' not in response_data else 'Command run successfully!')
+
+
+# Turns servo power supply ON/OFF
+def write_servo_power(command):
+    if command not in '1' and command not in '0':
+        print('[E] servo power command can only be 1 (on) or 0 (off)')
+        return
+    response_data = Socket.exec_single_command(Command.Command("SVON", command))
+    Utils.print_response_details(response_data)
+    print('[E] command run failed!' if '0000' not in response_data else 'Command run successfully!')
