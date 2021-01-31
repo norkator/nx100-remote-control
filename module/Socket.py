@@ -17,6 +17,7 @@ def exec_single_command(command):
         return Utils.clean_response(MockResponse.get_mock_response(command))
 
     client = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+    client.settimeout(5)
 
     # connect the client
     client.connect((nx100_address, nx100_port))

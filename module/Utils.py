@@ -28,4 +28,7 @@ def decimal_to_binary(num):
 
 # clean response
 def clean_response(response):
-    return response.replace('b\'', '').replace('\\r\'', '')
+    return response \
+        .replace('b\'', '') \
+        .replace('\\r\'', '') \
+        .replace('\\r\\n\'', '')
