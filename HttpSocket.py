@@ -1,4 +1,4 @@
-from module import Commands
+from module import Commands, Utils
 
 
 def run_commands():
@@ -12,7 +12,13 @@ def run_commands():
     # Commands.write_cancel()
     # Commands.write_servo_power('0')  # 1 on, 0 off
     # Commands.write_start_job('')  # empty means default set execution job
-    # Commands.write_linear_move()
+
+    # Commands.write_linear_move(
+    #     '0', '20', '0',
+    #     '353.769', '202.779', '120.658', '-1.34', '35.78', '27.84',
+    #     str(Utils.binary_to_decimal(0x00000001)),
+    #     '0', '0', '0', '0', '0', '0', '0'
+    # )
 
 
 run_commands()

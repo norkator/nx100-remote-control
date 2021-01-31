@@ -89,11 +89,17 @@ def write_start_job(job_name):
 
 # Moves a manipulator to a specified coordinate position in linear motion
 def write_linear_move(
-        motion_speed_selection, motion_speed, coordinate_specification,
-        x, y, z, tx, ty, tz,
-        d_10, d_11, d_12, d_13, d_14, d_15, d_16, d_17
-):
-    # response_data = Socket.exec_single_command(Command.Command("MOVL", ...))
-    # Utils.print_response_details(response_data)
-    # print('[E] command run failed!' if '0000' not in response_data else 'Command run successfully!')
-    print('not implemented')
+        motion_speed_selection, motion_speed, coordinate_specification, x, y, z, tx, ty, tz, d_10, d_11, d_12, d_13,
+        d_14, d_15, d_16, d_17):
+    separator = ', '
+    response_data = Socket.exec_single_command(
+        Command.Command(
+            "MOVL",
+            separator.join(
+                [motion_speed_selection, motion_speed, coordinate_specification, x, y, z, tx, ty, tz, d_10, d_11, d_12,
+                 d_13, d_14, d_15, d_16, d_17]
+            )
+        )
+    )
+    Utils.print_response_details(response_data)
+    print('[E] command run failed!' if '0000' not in response_data else 'Command run successfully!')

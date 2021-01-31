@@ -26,6 +26,17 @@ def decimal_to_binary(num):
     return bin(num)
 
 
+# binary to decimal
+def binary_to_decimal(binary):
+    decimal, i, n = 0, 0, 0
+    while binary != 0:
+        dec = binary % 10
+        decimal = decimal + dec * pow(2, i)
+        binary = binary // 10
+        i += 1
+    return decimal
+
+
 # clean response
 def clean_response(response):
     return response \
