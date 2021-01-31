@@ -39,6 +39,13 @@ def read_status():
     # Todo, parse binary data
 
 
+# Reads the current job name, line No. and step No
+def read_current_job_details():
+    response_data = Socket.exec_single_command(Command.Command("RJSEQ", ""))
+    Utils.print_response_details(response_data)
+    # Todo, write response parser
+
+
 # Turns HOLD ON/OFF
 def write_hold(command):
     if command not in '1' and command not in '0':

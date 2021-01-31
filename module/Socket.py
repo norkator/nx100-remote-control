@@ -1,9 +1,11 @@
-from module import Utils
+from module import Utils, MockResponse
 import socket
 
 # NX100 robot parameters
 nx100_address = "192.168.2.28"
 nx100_port = 80
+
+MOCK_RESPONSE = True
 
 CR = "\r"
 CRLF = "\r\n"
@@ -11,6 +13,9 @@ CRLF = "\r\n"
 
 # exec single command object
 def exec_single_command(command):
+    if MOCK_RESPONSE:
+        return MockResponse.get_mock_response(command)
+
     client = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
 
     # connect the client
