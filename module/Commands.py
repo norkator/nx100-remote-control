@@ -21,7 +21,7 @@ def read_current_joint_coordinate_position():
 # coordinate_system = 0: Base coordinate, 1: Robot coordinate, 2: User coordinate 1...24
 def read_current_specified_coordinate_system_position(coordinate_system, include_external_axis='0'):
     request_alarms = Socket.exec_single_command(
-        Command.Command("RPOSC", (coordinate_system + ' ' + include_external_axis))
+        Command.Command("RPOSC", (coordinate_system + ', ' + include_external_axis))
     )
     Utils.print_response_details(request_alarms)
     # Todo, write response parser
@@ -30,6 +30,7 @@ def read_current_specified_coordinate_system_position(coordinate_system, include
 # Reads the status of mode, cycle, operation, alarm error, and servo
 def read_status():
     response_data = Socket.exec_single_command(Command.Command("RSTATS", ""))
+    Utils.print_response_details(response_data)
     parts = response_data.replace('b\'', '').replace('\\r\'', '').split(',')
     data_1 = Utils.decimal_to_binary(int(parts[0]))
     data_2 = Utils.decimal_to_binary(int(parts[1]))
