@@ -21,5 +21,11 @@ def print_response_details(command_response):
     print("Command response: " + command_response)
 
 
+# decimal to binary
 def decimal_to_binary(num):
     return bin(num)
+
+
+# clean response
+def clean_response(response):
+    return response.replace('b\'', '').replace('\\r\'', '')

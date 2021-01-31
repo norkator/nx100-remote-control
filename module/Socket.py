@@ -14,7 +14,7 @@ CRLF = "\r\n"
 # exec single command object
 def exec_single_command(command):
     if MOCK_RESPONSE:
-        return MockResponse.get_mock_response(command)
+        return Utils.clean_response(MockResponse.get_mock_response(command))
 
     client = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
 
@@ -52,7 +52,7 @@ def exec_single_command(command):
     # close socket
     client.close()
 
-    return command_data_response
+    return Utils.clean_response(command_data_response)
 
 
 # exec array of command objects

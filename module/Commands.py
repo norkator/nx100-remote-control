@@ -31,7 +31,7 @@ def read_current_specified_coordinate_system_position(coordinate_system, include
 def read_status():
     response_data = Socket.exec_single_command(Command.Command("RSTATS", ""))
     Utils.print_response_details(response_data)
-    parts = response_data.replace('b\'', '').replace('\\r\'', '').split(',')
+    parts = response_data.split(',')
     data_1 = Utils.decimal_to_binary(int(parts[0]))
     data_2 = Utils.decimal_to_binary(int(parts[1]))
     print(data_1)
