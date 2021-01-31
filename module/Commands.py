@@ -1,5 +1,5 @@
 from module import Socket, Utils
-from objects import Command
+from objects import Command, Status
 
 
 # Reads the error alarm code
@@ -34,9 +34,21 @@ def read_status():
     parts = response_data.split(',')
     data_1 = Utils.decimal_to_binary(int(parts[0]))
     data_2 = Utils.decimal_to_binary(int(parts[1]))
-    print(data_1)
-    print(data_2)
-    # Todo, parse binary data
+    s = Status.Status(data_1, data_2)
+    print('Command remote: ' + str(s.is_command_remote()))
+    print('Play: ' + str(s.is_play()))
+    print('Teach ' + str(s.is_teach()))
+    print('Safety speed operation: ' + str(s.is_safety_speed_operation()))
+    print('Running: ' + str(s.is_running()))
+    print('Auto: ' + str(s.is_auto()))
+    print('One cycle: ' + str(s.is_one_cycle()))
+    print('Step: ' + str(s.is_step()))
+    print('Servo on: ' + str(s.is_servo_on()))
+    print('Error occurring: ' + str(s.is_error_occurring()))
+    print('Alarm occurring: ' + str(s.is_alarm_occurring()))
+    print('Command hold: ' + str(s.is_command_hold()))
+    print('External hold: ' + str(s.is_external_hold()))
+    print('Programming pendant hold: ' + str(s.is_programming_pendant_hold()))
 
 
 # Reads the current job name, line No. and step No

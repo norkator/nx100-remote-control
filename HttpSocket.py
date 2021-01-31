@@ -2,10 +2,10 @@ from module import Commands, Utils
 
 
 def run_commands():
-    Commands.read_alarms()
+    # Commands.read_alarms()
     # Commands.read_current_joint_coordinate_position()
     # Commands.read_current_specified_coordinate_system_position('0', '0')
-    # Commands.read_status()
+    Commands.read_status()
     # Commands.read_current_job_details()
     # Commands.write_hold('0')  # 1 on, 0 off
     # Commands.write_reset()
@@ -19,6 +19,5 @@ def run_commands():
     #     str(Utils.binary_to_decimal(0x00000001)),
     #     '0', '0', '0', '0', '0', '0', '0'
     # )
-
 
 run_commands()
