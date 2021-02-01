@@ -16,6 +16,7 @@ class S(BaseHTTPRequestHandler):
         filename = 'index.html'
         html_content = f"<html><body><h1>{message}</h1></body></html>"
         job_name = Commands.read_current_job_details().job_name()
+        status = Commands.read_status()
         with open(os.path.join(base_path, filename)) as f:
             html_content = f.read()
             html_content = html_content \

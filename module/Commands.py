@@ -49,6 +49,7 @@ def read_status():
     print('Command hold: ' + str(s.is_command_hold()))
     print('External hold: ' + str(s.is_external_hold()))
     print('Programming pendant hold: ' + str(s.is_programming_pendant_hold()))
+    return s
 
 
 # Reads the current job name, line No. and step No
