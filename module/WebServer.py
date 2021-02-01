@@ -18,7 +18,8 @@ class S(BaseHTTPRequestHandler):
         job_name = Commands.read_current_job_details().job_name()
         with open(os.path.join(base_path, filename)) as f:
             html_content = f.read()
-            html_content = html_content.replace('{{jobName}}', job_name)
+            html_content = html_content\
+                .replace('{{jobName}}', job_name)
         return html_content.encode("utf8")  # NOTE: must return a bytes object!
 
     def do_GET(self):
@@ -37,6 +38,7 @@ class S(BaseHTTPRequestHandler):
         print(command)
         if command == 'start_job':
             Commands.write_start_job('')
+
         self._set_headers()
         self.wfile.write("".format(self.path).encode('utf-8'))
 
