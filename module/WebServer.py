@@ -21,7 +21,15 @@ class S(BaseHTTPRequestHandler):
             with open(os.path.join(base_path, filename)) as f:
                 html_content = f.read()
                 html_content = html_content \
-                    .replace('{{jobName}}', job_name)
+                    .replace('{{jobName}}', job_name) \
+                    .replace('{{commandRemote}}', str(status.is_command_remote())) \
+                    .replace('{{playMode}}', str(status.is_play())) \
+                    .replace('{{isHold}}', str(
+                    status.is_command_hold() or status.is_command_hold() or status.is_programming_pendant_hold())) \
+                    .replace('{{teachMode}}', str(status.is_teach())) \
+                    .replace('{{running}}', str(status.is_running())) \
+                    .replace('{{servoOn}}', str(status.is_servo_on())) \
+                    .replace('{{isError}}', str(status.is_error_occurring()))
             return html_content.encode("utf8")  # NOTE: must return a bytes object!
         else:
             return "".encode('utf-8')
