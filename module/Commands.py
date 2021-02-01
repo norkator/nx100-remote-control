@@ -35,20 +35,20 @@ def read_status():
     data_1 = Utils.decimal_to_binary(int(parts[0]))
     data_2 = Utils.decimal_to_binary(int(parts[1]))
     s = Status.Status(data_1, data_2)
-    print('Command remote: ' + str(s.is_command_remote()))
-    print('Play: ' + str(s.is_play()))
-    print('Teach ' + str(s.is_teach()))
-    print('Safety speed operation: ' + str(s.is_safety_speed_operation()))
-    print('Running: ' + str(s.is_running()))
-    print('Auto: ' + str(s.is_auto()))
-    print('One cycle: ' + str(s.is_one_cycle()))
-    print('Step: ' + str(s.is_step()))
-    print('Servo on: ' + str(s.is_servo_on()))
-    print('Error occurring: ' + str(s.is_error_occurring()))
-    print('Alarm occurring: ' + str(s.is_alarm_occurring()))
-    print('Command hold: ' + str(s.is_command_hold()))
-    print('External hold: ' + str(s.is_external_hold()))
-    print('Programming pendant hold: ' + str(s.is_programming_pendant_hold()))
+    print('Command remote: ' + str(s.is_command_remote()) + ', ' +
+          'Play: ' + str(s.is_play()) + ', ' +
+          'Teach ' + str(s.is_teach()) + ', ' +
+          'Safety speed operation: ' + str(s.is_safety_speed_operation()) + ', ' +
+          'Running: ' + str(s.is_running()) + ', ' +
+          'Auto: ' + str(s.is_auto()) + ', ' +
+          'One cycle: ' + str(s.is_one_cycle()) + ', ' +
+          'Step: ' + str(s.is_step()) + ', ' +
+          'Servo on: ' + str(s.is_servo_on()) + ', ' +
+          'Error occurring: ' + str(s.is_error_occurring()) + ', ' +
+          'Alarm occurring: ' + str(s.is_alarm_occurring()) + ', ' +
+          'Command hold: ' + str(s.is_command_hold()) + ', ' +
+          'External hold: ' + str(s.is_external_hold()) + ', ' +
+          'Programming pendant hold: ' + str(s.is_programming_pendant_hold()))
     return s
 
 
