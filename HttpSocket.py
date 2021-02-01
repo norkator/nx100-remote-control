@@ -1,11 +1,13 @@
 from module import Commands, Utils
+from module import WebServer
 
 
-def run_commands():
+def start_app():
+    WebServer.run()
     # Commands.read_alarms()
     # Commands.read_current_joint_coordinate_position()
     # Commands.read_current_specified_coordinate_system_position('0', '0')
-    Commands.read_status()
+    # Commands.read_status()
     # Commands.read_current_job_details()
     # Commands.write_hold('0')  # 1 on, 0 off
     # Commands.write_reset()
@@ -20,4 +22,5 @@ def run_commands():
     #     '0', '0', '0', '0', '0', '0', '0'
     # )
 
-run_commands()
+
+start_app()

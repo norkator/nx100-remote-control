@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>NX100 Control</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet"
+          integrity="sha384-giJF6kkoqNQ00vy+HMDP7azOuL0xtbfIcaT9wjKHr8RbDVddVHyTfAAsrekwKmP1" crossorigin="anonymous">
+    <style>
+    </style>
+</head>
+<body>
+<div class="container">
+    <div class="card mt-4">
+        <h5 class="card-header">NX100 - MASTER JOB: {{jobName}}</h5>
+        <div class="card-body">
+            <h5 class="card-title">Status</h5>
+            <div class="mt-2 table-responsive">
+                <table class="table table-success table-striped">
+                    <thead>
+                    <tr>
+                        <th scope="col">CmdRem</th>
+                        <th scope="col">Play</th>
+                        <th scope="col">Teach</th>
+                        <th scope="col">Hold</th>
+                        <th scope="col">Running</th>
+                        <th scope="col">Servo on</th>
+                        <th scope="col">Error</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr>
+                        <th>{{commandRemote}}</th>
+                        <th>{{playMode}}</th>
+                        <th>{{isHold}}</th>
+                        <th>{{teachMode}}</th>
+                        <th>{{running}}</th>
+                        <th>{{servoOn}}</th>
+                        <th>{{isError}}</th>
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
+            <h5 class="card-title mt-4">Controls</h5>
+            <div class="mt-4">
+                <div class="row align-items-start">
+                    <div class="col-auto">
+                        <a onclick="command('hold_on')" class="btn btn-warning">HOLD ON</a>
+                        <a onclick="command('hold_off')" class="btn btn-warning">HOLD OFF</a>
+                    </div>
+                </div>
+                <div class="row align-items-start mt-4">
+                    <div class="col-auto">
+                        <a onclick="command('servo_on')" class="btn btn-danger">SERVO PWR ON</a>
+                        <a onclick="command('servo_off')" class="btn btn-danger">SERVO PWR OFF</a>
+                    </div>
+                </div>
+                <div class="row align-items-start mt-4">
+                    <div class="col-auto">
+                        <a onclick="command('start_job')" class="btn btn-primary">START JOB</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    async function command(cmd) {
+        await fetch(window.location.href, {
+            headers: {"content-type": "application/json; charset=UTF-8"},
+            body: cmd,
+            method: "POST",
+        });
+    }
+</script>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-ygbV9kiqUc6oa4msXn9868pTtWMgiQaeYH7/t7LECLbyPA2x65Kgf80OJFdroafW"
+        crossorigin="anonymous"></script>
+</body>
+</html>
