@@ -1,5 +1,5 @@
 from module import Socket, Utils
-from objects import Command, Status, JobDetail
+from objects import Command, Status, JobDetail, CurrentPos
 
 
 # Reads the error alarm code
@@ -20,11 +20,11 @@ def read_current_joint_coordinate_position():
 # The specification with or without external axis can be made
 # coordinate_system = 0: Base coordinate, 1: Robot coordinate, 2: User coordinate 1...24
 def read_current_specified_coordinate_system_position(coordinate_system, include_external_axis='0'):
-    request_alarms = Socket.exec_single_command(
+    position_response = Socket.exec_single_command(
         Command.Command("RPOSC", (coordinate_system + ', ' + include_external_axis))
     )
-    Utils.print_response_details(request_alarms)
-    # Todo, write response parser
+    Utils.print_response_details(position_response)
+    return CurrentPos.CurrentPos(position_response)
 
 
 # Reads the status of mode, cycle, operation, alarm error, and servo
@@ -101,18 +101,11 @@ def write_start_job(job_name):
 
 
 # Moves a manipulator to a specified coordinate position in linear motion
-def write_linear_move(
-        motion_speed_selection, motion_speed, coordinate_specification, x, y, z, tx, ty, tz, d_10, d_11, d_12, d_13,
-        d_14, d_15, d_16, d_17):
-    separator = ', '
+def write_linear_move(move_l):
+    move_cmd = move_l.get_command()
+    print('[i] move: ' + move_cmd)
     response_data = Socket.exec_single_command(
-        Command.Command(
-            "MOVL",
-            separator.join(
-                [motion_speed_selection, motion_speed, coordinate_specification, x, y, z, tx, ty, tz, d_10, d_11, d_12,
-                 d_13, d_14, d_15, d_16, d_17]
-            )
-        )
+        Command.Command("MOVL", move_cmd)
     )
-    Utils.print_response_details(response_data)
+    # Utils.print_response_details(response_data)
     print('[E] command run failed!' if '0000' not in response_data else 'Command run successfully!')
