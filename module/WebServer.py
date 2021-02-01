@@ -15,9 +15,10 @@ class S(BaseHTTPRequestHandler):
     def _html(self, message):
         filename = 'index.html'
         html_content = f"<html><body><h1>{message}</h1></body></html>"
+        job_name = Commands.read_current_job_details().job_name()
         with open(os.path.join(base_path, filename)) as f:
             html_content = f.read()
-            html_content = html_content.replace('{{jobName}}', Commands.read_current_job_details())
+            html_content = html_content.replace('{{jobName}}', job_name)
         return html_content.encode("utf8")  # NOTE: must return a bytes object!
 
     def do_GET(self):

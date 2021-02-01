@@ -1,5 +1,5 @@
 from module import Socket, Utils
-from objects import Command, Status
+from objects import Command, Status, JobDetail
 
 
 # Reads the error alarm code
@@ -55,8 +55,7 @@ def read_status():
 def read_current_job_details():
     response_data = Socket.exec_single_command(Command.Command("RJSEQ", ""))
     Utils.print_response_details(response_data)
-    return response_data
-    # Todo, write response parser
+    return JobDetail.JobDetail(response_data)
 
 
 # Turns HOLD ON/OFF
