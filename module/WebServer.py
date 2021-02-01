@@ -1,24 +1,5 @@
-"""
-Copyright 2021 Brad Montgomery
-Permission is hereby granted, free of charge, to any person obtaining a copy of this software and
-associated documentation files (the "Software"), to deal in the Software without restriction,
-including without limitation the rights to use, copy, modify, merge, publish, distribute, sublicense,
-and/or sell copies of the Software, and to permit persons to whom the Software is furnished to do so,
-subject to the following conditions:
-The above copyright notice and this permission notice shall be included in all copies or substantial
-portions of the Software.
-THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT
-LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT.
-IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY,
-WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE
-OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
-----------------------------------------------------
-Original gist: https://gist.github.com/bradmontgomery/2219997
-this file is modified to suit this nx100 repository purpose
-"""
-
-import argparse
 from http.server import HTTPServer, BaseHTTPRequestHandler
+from module import Commands
 import os
 
 base_path = os.path.dirname(__file__)
@@ -36,6 +17,7 @@ class S(BaseHTTPRequestHandler):
         html_content = f"<html><body><h1>{message}</h1></body></html>"
         with open(os.path.join(base_path, filename)) as f:
             html_content = f.read()
+            html_content = html_content.replace('{{jobName}}', Commands.read_current_job_details())
         return html_content.encode("utf8")  # NOTE: must return a bytes object!
 
     def do_GET(self):
@@ -46,9 +28,16 @@ class S(BaseHTTPRequestHandler):
         self._set_headers()
 
     def do_POST(self):
-        # Doesn't do anything with posted data
+        content_length = int(self.headers['Content-Length'])  # <--- Gets the size of data
+        post_data = self.rfile.read(content_length)  # <--- Gets the data itself
+        # print("POST request,\nPath: %s\nHeaders:\n%s\n\nBody:\n%s\n",
+        #       str(self.path), str(self.headers), post_data.decode('utf-8'))
+        command = post_data.decode("utf-8")
+        print(command)
+        if command == 'start_job':
+            Commands.write_start_job('')
         self._set_headers()
-        self.wfile.write(self._html("POST!"))
+        self.wfile.write("".format(self.path).encode('utf-8'))
 
 
 def run(server_class=HTTPServer, handler_class=S, addr="localhost", port=8080):

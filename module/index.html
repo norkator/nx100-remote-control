@@ -3,9 +3,33 @@
 <head>
     <meta charset="UTF-8">
     <title>NX100 Control</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet"
+          integrity="sha384-giJF6kkoqNQ00vy+HMDP7azOuL0xtbfIcaT9wjKHr8RbDVddVHyTfAAsrekwKmP1" crossorigin="anonymous">
 </head>
 <body>
-<small>Test body content</small>
-<button>Start job</button>
+<div class="container">
+    <div class="card mt-4">
+        <h5 class="card-header">NX100 - {{jobName}}</h5>
+        <div class="card-body">
+            <a onclick="startJob()" class="btn btn-primary">START JOB</a>
+            <a href="#" class="btn btn-light">HOLD</a>
+        </div>
+    </div>
+</div>
+
+<script>
+    async function startJob() {
+        const response = await fetch(window.location.href, {
+            headers: {"content-type": "application/json; charset=UTF-8"},
+            body: 'start_job',
+            method: "POST",
+        });
+        console.log(response);
+    }
+</script>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-ygbV9kiqUc6oa4msXn9868pTtWMgiQaeYH7/t7LECLbyPA2x65Kgf80OJFdroafW"
+        crossorigin="anonymous"></script>
 </body>
 </html>
