@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta charset="UTF-8">
     <title>NX100 Control</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet"
@@ -41,22 +42,62 @@
                 </table>
             </div>
             <h5 class="card-title mt-4">Controls</h5>
-            <div class="mt-4">
+            <div class="mt-2">
                 <div class="row align-items-start">
                     <div class="col-auto">
-                        <a onclick="command('hold_on')" class="btn btn-warning">HOLD ON</a>
-                        <a onclick="command('hold_off')" class="btn btn-warning">HOLD OFF</a>
+                        <button onclick="command('hold_on')" class="btn btn-warning mt-2">HOLD ON</button>
+                        <button onclick="command('hold_off')" class="btn btn-warning mt-2">HOLD OFF</button>
                     </div>
                 </div>
-                <div class="row align-items-start mt-4">
+                <div class="row align-items-start mt-2">
                     <div class="col-auto">
-                        <a onclick="command('servo_on')" class="btn btn-danger">SERVO PWR ON</a>
-                        <a onclick="command('servo_off')" class="btn btn-danger">SERVO PWR OFF</a>
+                        <button onclick="command('servo_on')" class="btn btn-danger mt-2">SERVO PWR ON</button>
+                        <button onclick="command('servo_off')" class="btn btn-danger mt-2">SERVO PWR OFF</button>
                     </div>
                 </div>
-                <div class="row align-items-start mt-4">
+                <div class="row align-items-start mt-2">
                     <div class="col-auto">
-                        <a onclick="command('start_job')" class="btn btn-primary">START JOB</a>
+                        <button onclick="command('start_job')" class="btn btn-primary mt-2">START JOB</button>
+                    </div>
+                </div>
+            </div>
+            <h5 class="card-title mt-4">Move</h5>
+            <small>Manipulator move testing</small>
+            <div class="mt-2">
+                <div class="row align-items-center">
+                    <div class="col-auto">
+                        <button onclick="command('move_s_l')" type="button" class="btn btn-secondary btn-sm">S-</button>
+                        -
+                        <button onclick="command('move_s_r')" type="button" class="btn btn-secondary btn-sm">S+</button>
+                    </div>
+                    <div class="col-auto">
+                        <button type="button" class="btn btn-secondary btn-sm">R-</button>
+                        -
+                        <button type="button" class="btn btn-secondary btn-sm">R+</button>
+                    </div>
+                </div>
+                <div class="row align-items-center mt-3">
+                    <div class="col-auto">
+                        <button onclick="command('move_l_l')" type="button" class="btn btn-secondary btn-sm">L-</button>
+                        -
+                        <button onclick="command('move_l_r')" type="button" class="btn btn-secondary btn-sm">L+</button>
+                    </div>
+                    <div class="col-auto">
+                        <button type="button" class="btn btn-secondary btn-sm">B-</button>
+                        -
+                        <button type="button" class="btn btn-secondary btn-sm">B+</button>
+                    </div>
+                </div>
+                <div class="row align-items-center mt-3">
+                    <div class="col-auto">
+                        <button onclick="command('move_u_l')" type="button" class="btn btn-secondary btn-sm">U-</button>
+                        -
+                        <button onclick="command('move_u_r')" type="button" class="btn btn-secondary btn-sm">U+</button>
+                    </div>
+                    <div class="col-auto">
+                        <button type="button" class="btn btn-secondary btn-sm">T-</button>
+                        -
+                        <button type="button" class="btn btn-secondary btn-sm">T+</button>
                     </div>
                 </div>
             </div>
