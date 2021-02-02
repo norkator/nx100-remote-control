@@ -68,21 +68,21 @@ def write_hold(command):
         return
     response_data = Socket.exec_single_command(Command.Command("HOLD", command))
     Utils.print_response_details(response_data)
-    print('[E] command run failed!' if '0000' not in response_data else 'Command run successfully!')
+    print('[E] command run failed!' if '0000' not in response_data else '[i] command run successfully!')
 
 
 # Resets an alarm of manipulator
 def write_reset():
     response_data = Socket.exec_single_command(Command.Command("RESET", ""))
     Utils.print_response_details(response_data)
-    print('[E] command run failed!' if '0000' not in response_data else 'Command run successfully!')
+    print('[E] command run failed!' if '0000' not in response_data else '[i] command run successfully!')
 
 
 # Cancels an error
 def write_cancel():
     response_data = Socket.exec_single_command(Command.Command("CANCEL", ""))
     Utils.print_response_details(response_data)
-    print('[E] command run failed!' if '0000' not in response_data else 'Command run successfully!')
+    print('[E] cancel command run failed!' if '0000' not in response_data else '[i] cancel command run successfully!')
 
 
 # Turns servo power supply ON/OFF
@@ -92,14 +92,15 @@ def write_servo_power(command):
         return
     response_data = Socket.exec_single_command(Command.Command("SVON", command))
     Utils.print_response_details(response_data)
-    print('[E] command run failed!' if '0000' not in response_data else 'Command run successfully!')
+    print('[E] servo command run failed!' if '0000' not in response_data else '[i] servo command run successfully!')
 
 
 # Starts a job
 def write_start_job(job_name):
     response_data = Socket.exec_single_command(Command.Command("START", job_name))
     Utils.print_response_details(response_data)
-    print('[E] command run failed!' if '0000' not in response_data else 'Command run successfully!')
+    print(
+        '[E] start job command run failed!' if '0000' not in response_data else '[i] start job command run successfully!')
 
 
 # Moves a manipulator to a specified coordinate position in linear motion
@@ -110,4 +111,4 @@ def write_linear_move(move_l):
         Command.Command("MOVL", move_cmd)
     )
     # Utils.print_response_details(response_data)
-    print('[E] command run failed!' if '0000' not in response_data else 'Command run successfully!')
+    print('[E] command run failed!' if '0000' not in response_data else '[i] command run successfully!')
