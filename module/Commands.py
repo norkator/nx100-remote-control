@@ -1,12 +1,14 @@
 from module import Socket, Utils
-from objects import Command, Status, JobDetail, CurrentPos
+from objects import Command, Status, JobDetail, CurrentPos, Alarm
 
 
 # Reads the error alarm code
 def read_alarms():
     request_alarms = Socket.exec_single_command(Command.Command("RALARM", ""))
-    Utils.print_response_details(request_alarms)
-    # Todo, write response parser
+    # Utils.print_response_details(request_alarms)
+    alarms = Alarm.Alarm(request_alarms)
+    print('Alarms: ' + str(alarms.get_alarms()))
+    return alarms
 
 
 # Reads the current position in joint coordinate system
