@@ -6,6 +6,10 @@ import os
 base_path = os.path.dirname(__file__)
 
 
+def get_position():
+    return Commands.read_current_specified_coordinate_system_position('0', '0')
+
+
 # noinspection PyPep8Naming
 class S(BaseHTTPRequestHandler):
     def _set_headers(self):
@@ -20,6 +24,7 @@ class S(BaseHTTPRequestHandler):
                 html_content = f"<html><body><h1>{message}</h1></body></html>"
                 job_name = Commands.read_current_job_details().job_name()
                 status = Commands.read_status()
+                c_pos = get_position()
                 with open(os.path.join(base_path, filename)) as f:
                     html_content = f.read()
                     html_content = html_content \
@@ -31,13 +36,18 @@ class S(BaseHTTPRequestHandler):
                         .replace('{{teachMode}}', str(status.is_teach())) \
                         .replace('{{running}}', str(status.is_running())) \
                         .replace('{{servoOn}}', str(status.is_servo_on())) \
-                        .replace('{{isError}}', str(status.is_error_occurring()))
+                        .replace('{{isError}}', str(status.is_error_occurring())) \
+                        .replace('{{x}}', str(c_pos.x)) \
+                        .replace('{{y}}', str(c_pos.y)) \
+                        .replace('{{z}}', str(c_pos.z)) \
+                        .replace('{{tx}}', str(c_pos.tx)) \
+                        .replace('{{ty}}', str(c_pos.ty)) \
+                        .replace('{{tz}}', str(c_pos.tz))
                 return html_content.encode("utf8")  # NOTE: must return a bytes object!
             else:
                 return "".encode('utf-8')
         except Exception as e:
             return html_content.encode("utf8")
-
 
     def do_GET(self):
         self._set_headers()
@@ -63,14 +73,14 @@ class S(BaseHTTPRequestHandler):
         elif command == 'servo_off':
             Commands.write_servo_power('0')
         elif command == 'move_s_l':
-            c_pos = Commands.read_current_specified_coordinate_system_position('0', '0')
+            c_pos = get_position()
             Commands.write_linear_move(MoveL.MoveL(
                 0, 20, 0,
                 (c_pos.get_x() - 10), c_pos.get_y(), c_pos.get_z(), c_pos.get_tx(), c_pos.get_ty(), c_pos.get_tz(),
                 Utils.binary_to_decimal(0x00000001)
             ))
         elif command == 'move_s_r':
-            c_pos = Commands.read_current_specified_coordinate_system_position('0', '0')
+            c_pos = get_position()
             Commands.write_linear_move(MoveL.MoveL(
                 0, 20, 0,
                 (c_pos.get_x() + 10), c_pos.get_y(), c_pos.get_z(), c_pos.get_tx(), c_pos.get_ty(), c_pos.get_tz(),
