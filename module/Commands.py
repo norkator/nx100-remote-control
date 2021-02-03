@@ -1,5 +1,5 @@
 from module import Socket, Utils
-from objects import Command, Status, JobDetail, CurrentPos, Alarm
+from objects import Command, Status, JobDetail, CurrentPos, Alarm, Response
 
 
 # Reads the error alarm code
@@ -66,23 +66,23 @@ def write_hold(command):
     if command not in '1' and command not in '0':
         print('[E] hold command can only be 1 (on) or 0 (off)')
         return
-    response_data = Socket.exec_single_command(Command.Command("HOLD", command))
-    Utils.print_response_details(response_data)
-    print('[E] command run failed!' if '0000' not in response_data else '[i] command run successfully!')
+    response = Response.Response(Socket.exec_single_command(Command.Command("HOLD", command)))
+    Utils.print_response_details(response.get_response())
+    print('[i] hold command run successfully!' if response.is_success() else '[E] hold command run failed!')
 
 
 # Resets an alarm of manipulator
 def write_reset():
-    response_data = Socket.exec_single_command(Command.Command("RESET", ""))
-    Utils.print_response_details(response_data)
-    print('[E] command run failed!' if '0000' not in response_data else '[i] command run successfully!')
+    response = Response.Response(Socket.exec_single_command(Command.Command("RESET", "")))
+    Utils.print_response_details(response.get_response())
+    print('[i] reset command run successfully!' if response.is_success() else '[E] reset command run failed!')
 
 
 # Cancels an error
 def write_cancel():
-    response_data = Socket.exec_single_command(Command.Command("CANCEL", ""))
-    Utils.print_response_details(response_data)
-    print('[E] cancel command run failed!' if '0000' not in response_data else '[i] cancel command run successfully!')
+    response = Response.Response(Socket.exec_single_command(Command.Command("CANCEL", "")))
+    Utils.print_response_details(response.get_response())
+    print('[i] cancel command run successfully!' if response.is_success() else '[E] cancel command run failed!')
 
 
 # Turns servo power supply ON/OFF
@@ -90,25 +90,25 @@ def write_servo_power(command):
     if command not in '1' and command not in '0':
         print('[E] servo power command can only be 1 (on) or 0 (off)')
         return
-    response_data = Socket.exec_single_command(Command.Command("SVON", command))
-    Utils.print_response_details(response_data)
-    print('[E] servo command run failed!' if '0000' not in response_data else '[i] servo command run successfully!')
+    response = Response.Response(Socket.exec_single_command(Command.Command("SVON", command)))
+    Utils.print_response_details(response.get_response())
+    print('[i] servo command run successfully!' if response.is_success() else '[E] servo command run failed!')
 
 
 # Starts a job
 def write_start_job(job_name):
-    response_data = Socket.exec_single_command(Command.Command("START", job_name))
-    Utils.print_response_details(response_data)
-    print(
-        '[E] start job command run failed!' if '0000' not in response_data else '[i] start job command run successfully!')
+    response = Response.Response(Socket.exec_single_command(Command.Command("START", job_name)))
+    Utils.print_response_details(response.get_response())
+    print('[i] start job command run successfully!' if response.is_success() else '[E] start job command run failed!')
+    return response
 
 
 # Moves a manipulator to a specified coordinate position in linear motion
 def write_linear_move(move_l):
     move_cmd = move_l.get_command()
     print('[i] move: ' + move_cmd)
-    response_data = Socket.exec_single_command(
+    response = Response.Response(Socket.exec_single_command(
         Command.Command("MOVL", move_cmd)
-    )
+    ))
     # Utils.print_response_details(response_data)
-    print('[E] command run failed!' if '0000' not in response_data else '[i] command run successfully!')
+    print('[i] command run successfully!' if response.is_success() else '[E] command run failed!')
