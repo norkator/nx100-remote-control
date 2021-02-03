@@ -69,6 +69,7 @@ def write_hold(command):
     response = Response.Response(Socket.exec_single_command(Command.Command("HOLD", command)))
     Utils.print_response_details(response.get_response())
     print('[i] hold command run successfully!' if response.is_success() else '[E] hold command run failed!')
+    return response
 
 
 # Resets an alarm of manipulator
@@ -76,6 +77,7 @@ def write_reset():
     response = Response.Response(Socket.exec_single_command(Command.Command("RESET", "")))
     Utils.print_response_details(response.get_response())
     print('[i] reset command run successfully!' if response.is_success() else '[E] reset command run failed!')
+    return response
 
 
 # Cancels an error
@@ -83,6 +85,7 @@ def write_cancel():
     response = Response.Response(Socket.exec_single_command(Command.Command("CANCEL", "")))
     Utils.print_response_details(response.get_response())
     print('[i] cancel command run successfully!' if response.is_success() else '[E] cancel command run failed!')
+    return response
 
 
 # Turns servo power supply ON/OFF
@@ -93,6 +96,7 @@ def write_servo_power(command):
     response = Response.Response(Socket.exec_single_command(Command.Command("SVON", command)))
     Utils.print_response_details(response.get_response())
     print('[i] servo command run successfully!' if response.is_success() else '[E] servo command run failed!')
+    return response
 
 
 # Starts a job
@@ -112,3 +116,4 @@ def write_linear_move(move_l):
     ))
     # Utils.print_response_details(response_data)
     print('[i] command run successfully!' if response.is_success() else '[E] command run failed!')
+    return response
