@@ -15,7 +15,7 @@ def read_alarms():
 def read_current_joint_coordinate_position():
     response_data = Socket.exec_single_command(Command.Command("RPOSJ", ""))
     Utils.print_response_details(response_data)
-    # Todo, write response parser
+    return response_data
 
 
 # Reads the current position in a specified coordinate system.

@@ -29,7 +29,7 @@
                     </tr>
                     </thead>
                     <tbody>
-                    <tr>
+                    <tr id="statusTable">
                         <th>{{commandRemote}}</th>
                         <th>{{playMode}}</th>
                         <th>{{isHold}}</th>
@@ -131,12 +131,22 @@
 
 <script>
     async function command(cmd) {
-        await fetch(window.location.href, {
+        const r = await fetch(window.location.href, {
             headers: {"content-type": "application/json; charset=UTF-8"},
             body: cmd,
             method: "POST",
         });
+        console.info(cmd, r.status, r.statusText);
     }
+
+    (function () {
+        const status = document.getElementById('statusTable');
+        status.childNodes.forEach(element => {
+            if (element.classList !== undefined && element.textContent === 'True') {
+                element.classList.add("text-danger");
+            }
+        })
+    })();
 </script>
 
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/js/bootstrap.bundle.min.js"
