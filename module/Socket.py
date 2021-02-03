@@ -5,7 +5,7 @@ import socket
 nx100_address = "192.168.2.28"
 nx100_port = 80
 
-MOCK_RESPONSE = True
+MOCK_RESPONSE = False
 
 CR = "\r"
 CRLF = "\r\n"
