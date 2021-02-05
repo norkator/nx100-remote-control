@@ -2,7 +2,8 @@
 
 # Motoman NX100 - Remote Control
 
-Yaskawa Motoman NX100 industrial robot remote control ability research.
+Yaskawa Motoman NX100 industrial robot remote control ability research. 
+See [Youtube demo video](https://youtu.be/9swshogfL1c).
 
 
 Table of contents
@@ -18,7 +19,7 @@ Documents
 Documents for development
 
 * [Ethernet Server Function Manual](https://drive.google.com/file/d/11TY9v_Tb5k23DTz9VuEBmj-vJE5Fmc4R/view) 
-
+* [Youtube demo](https://youtu.be/9swshogfL1c)
 
 
 Goals
