@@ -5,6 +5,9 @@ import os
 
 base_path = os.path.dirname(__file__)
 
+SPEED = 50
+MOVE_MM = 25
+
 
 def get_position():
     return Commands.read_current_specified_coordinate_system_position('0', '0')
@@ -72,20 +75,44 @@ class S(BaseHTTPRequestHandler):
             Commands.write_servo_power('1')
         elif command == 'servo_off':
             Commands.write_servo_power('0')
-        elif command == 'move_s_l':
+        elif command == 'move_s_l' or command == 'move_s_r':
             c_pos = get_position()
             Commands.write_linear_move(MoveL.MoveL(
-                0, 20, 0,
-                (c_pos.get_x() - 10), c_pos.get_y(), c_pos.get_z(), c_pos.get_tx(), c_pos.get_ty(), c_pos.get_tz(),
+                0, SPEED, 0,
+                (c_pos.get_x() - MOVE_MM) if command == 'move_s_l' else (c_pos.get_x() + MOVE_MM),
+                c_pos.get_y(),
+                c_pos.get_z(), c_pos.get_tx(), c_pos.get_ty(), c_pos.get_tz(),
                 Utils.binary_to_decimal(0x00000001)
             ))
-        elif command == 'move_s_r':
+        elif command == 'move_l_l' or command == 'move_l_r':
             c_pos = get_position()
             Commands.write_linear_move(MoveL.MoveL(
-                0, 20, 0,
-                (c_pos.get_x() + 10), c_pos.get_y(), c_pos.get_z(), c_pos.get_tx(), c_pos.get_ty(), c_pos.get_tz(),
+                0, SPEED, 0,
+                c_pos.get_x(),
+                (c_pos.get_y() - MOVE_MM) if command == 'move_l_l' else (c_pos.get_y() + MOVE_MM),
+                c_pos.get_z(), c_pos.get_tx(), c_pos.get_ty(), c_pos.get_tz(),
                 Utils.binary_to_decimal(0x00000001)
             ))
+        elif command == 'move_u_l' or command == 'move_u_r':
+            c_pos = get_position()
+            Commands.write_linear_move(MoveL.MoveL(
+                0, SPEED, 0,
+                c_pos.get_x(), c_pos.get_y(),
+                (c_pos.get_z() - MOVE_MM) if command == 'move_u_l' else (c_pos.get_z() + MOVE_MM),
+                c_pos.get_tx(), c_pos.get_ty(), c_pos.get_tz(),
+                Utils.binary_to_decimal(0x00000001)
+            ))
+        # Todo, do not use, ultra dangerous
+        # Todo, why causes robot to go 100% speed?
+        # elif command == 'move_r_l' or command == 'move_r_r':
+        #     c_pos = get_position()
+        #     Commands.write_linear_move(MoveL.MoveL(
+        #         0, 1, 0,
+        #         c_pos.get_x(), c_pos.get_y(), c_pos.get_z(),
+        #         (c_pos.get_tx() - 5.00) if command == 'move_r_l' else (c_pos.get_tx() + 5.0),
+        #         c_pos.get_ty(), c_pos.get_tz(),
+        #         Utils.binary_to_decimal(0x00000001)
+        #     ))
 
         self._set_headers()
         self.wfile.write("".format(self.path).encode('utf-8'))
