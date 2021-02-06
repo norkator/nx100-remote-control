@@ -102,7 +102,8 @@ class Controller:
             dead_zone: The size of dead zone for the analog sticks (default 0.15)
         """
 
-        print(pygame.joystick.get_count())
+        pygame.joystick.init()
+
         self.joystick = pygame.joystick.Joystick(Controller.id_num)
         self.joystick.init()
         self.dead_zone = dead_zone
