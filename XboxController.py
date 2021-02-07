@@ -1,5 +1,5 @@
-from module import xbox360_controller
-from module import Commands
+from module import xbox360_controller, Commands, Utils
+from objects import Time, MoveL
 import pygame
 
 # define some colors
@@ -23,6 +23,17 @@ ball_radius = 10
 ball_color = WHITE
 
 done = False
+
+time = Time.Time(Time.Time.get_current_millis())
+
+# robot
+SPEED = 50
+WAIT_FOR = 0.5  # seconds
+
+
+def get_position():
+    return Commands.read_current_specified_coordinate_system_position('0', '0')
+
 
 while not done:
 
@@ -50,11 +61,32 @@ while not done:
     # handle joysticks
     left_x, left_y = controller.get_left_stick()
 
-    # game logic
-    #  if playing:
-    ball_pos[0] += int(left_x * 5)
-    ball_pos[1] += int(left_y * 5)
-    # print(str(ball_pos[0]) + ' ' + str(ball_pos[1]))
+    # joystick logic handling
+    if left_x < -0.2 or left_x > 0.2:
+        if time.has_seconds_passed(WAIT_FOR):
+            time.set_time_now(time.get_current_millis())
+            c_pos = get_position()
+            Commands.write_linear_move(MoveL.MoveL(
+                0, SPEED, 0,
+                (c_pos.get_x() + int(left_x * 10)),
+                c_pos.get_y(),
+                c_pos.get_z(), c_pos.get_tx(), c_pos.get_ty(), c_pos.get_tz(),
+                Utils.binary_to_decimal(0x00000001)
+            ))
+            ball_pos[0] += int(left_x * 5)
+
+    if left_y < -0.2 or left_y > 0.2:
+        if time.has_seconds_passed(WAIT_FOR):
+            time.set_time_now(time.get_current_millis())
+            c_pos = get_position()
+            Commands.write_linear_move(MoveL.MoveL(
+                0, SPEED, 0,
+                c_pos.get_x(),
+                (c_pos.get_y() - int(left_y * 10)),
+                c_pos.get_z(), c_pos.get_tx(), c_pos.get_ty(), c_pos.get_tz(),
+                Utils.binary_to_decimal(0x00000001)
+            ))
+            ball_pos[1] += int(left_y * 5)
 
     # drawing
     screen.fill(BLACK)
