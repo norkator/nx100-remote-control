@@ -1,5 +1,6 @@
-import pygame
 from module import xbox360_controller
+from module import Commands
+import pygame
 
 # define some colors
 BLACK = (0, 0, 0)
@@ -9,7 +10,7 @@ RED = (255, 0, 0)
 # window settings
 size = [600, 600]
 screen = pygame.display.set_mode(size)
-pygame.display.set_caption("Simple Game")
+pygame.display.set_caption("NX100 remote")
 FPS = 60
 clock = pygame.time.Clock()
 
@@ -32,9 +33,11 @@ while not done:
 
         if event.type == pygame.JOYBUTTONDOWN:
             if event.button == xbox360_controller.START:
-                print('SERVO ON')
+                Commands.write_servo_power('1')
+                print('servo on')
             if event.button == xbox360_controller.BACK:
-                print('SERVO OFF')
+                Commands.write_servo_power('0')
+                print('servo off')
 
             # handle events for specific controllers
             if event.joy == controller.get_id():
@@ -48,10 +51,10 @@ while not done:
     left_x, left_y = controller.get_left_stick()
 
     # game logic
-    # if playing:
-    #     ball_pos[0] += int(left_x * 5)
-    #     ball_pos[1] += int(left_y * 5)
-    #     print(str(ball_pos[0]) + ' ' + str(ball_pos[1]))
+    #  if playing:
+    ball_pos[0] += int(left_x * 5)
+    ball_pos[1] += int(left_y * 5)
+    # print(str(ball_pos[0]) + ' ' + str(ball_pos[1]))
 
     # drawing
     screen.fill(BLACK)
