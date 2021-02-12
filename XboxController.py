@@ -27,12 +27,13 @@ done = False
 time = Time.Time(Time.Time.get_current_millis())
 
 # robot
-SPEED = 50
-WAIT_FOR = 0.5  # seconds
+SPEED = 30
+WAIT_FOR = 0.25  # seconds
+COORDINATE_SYSTEM = 0
 
 
 def get_position():
-    return Commands.read_current_specified_coordinate_system_position('0', '0')
+    return Commands.read_current_specified_coordinate_system_position(str(COORDINATE_SYSTEM), '0')
 
 
 while not done:
@@ -49,6 +50,9 @@ while not done:
             if event.button == xbox360_controller.BACK:
                 Commands.write_servo_power('0')
                 print('servo off')
+            if event.button == xbox360_controller.PAD_LEFT:
+                Commands.write_start_job('')
+                print('start default job')
 
             # handle events for specific controllers
             if event.joy == controller.get_id():
@@ -67,8 +71,8 @@ while not done:
             time.set_time_now(time.get_current_millis())
             c_pos = get_position()
             Commands.write_linear_move(MoveL.MoveL(
-                0, SPEED, 0,
-                (c_pos.get_x() + int(left_x * 10)),
+                0, int((abs(left_x) * 2) * SPEED), COORDINATE_SYSTEM,
+                (c_pos.get_x() + int(left_x * 20)),
                 c_pos.get_y(),
                 c_pos.get_z(), c_pos.get_tx(), c_pos.get_ty(), c_pos.get_tz(),
                 Utils.binary_to_decimal(0x00000001)
@@ -80,9 +84,9 @@ while not done:
             time.set_time_now(time.get_current_millis())
             c_pos = get_position()
             Commands.write_linear_move(MoveL.MoveL(
-                0, SPEED, 0,
+                0, int((abs(left_y) * 2) * SPEED), COORDINATE_SYSTEM,
                 c_pos.get_x(),
-                (c_pos.get_y() - int(left_y * 10)),
+                (c_pos.get_y() - int(left_y * 20)),
                 c_pos.get_z(), c_pos.get_tx(), c_pos.get_ty(), c_pos.get_tz(),
                 Utils.binary_to_decimal(0x00000001)
             ))
