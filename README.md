@@ -11,6 +11,10 @@ Table of contents
 * [Documents](#documents)
 * [Goals](#goals)
 * [Install](#install)
+* [Arduino](#arduino)
+    * [code](#code)
+    * [Sketch](#sketch)
+    
 
 
 
@@ -38,3 +42,25 @@ Install
 2. Set `/module/Socket.py` MOCK_RESPONSE variable to False for real robot use or use Mock to test without robot.
 3. Run app. Web interface opens from `http://localhost:8080/`
 
+
+
+Arduino
+============
+Arduino folder contains code and sketch for custom Gripper integrated for NX100 Motoman.
+
+
+Code
+-------
+No notes yet.
+
+
+
+Sketch
+-------
+
+![Electrical-drawing](./arduino/GripperSketch_bb.png)
+
+Custom part sources
+* [L298 Stepper Driver](https://forum.fritzing.org/uploads/short-url/cOmtO5zuLdoAiea5hppdo0YsU1N.fzpz)
+* [LM2596 Step Down Module](https://forum.fritzing.org/uploads/default/original/2X/8/876018ce35bcc333dd7083f3bbbc5dcc86a9fb20.fzpz)
+* [PC817 Opto-isolator](https://github.com/RafaGS/Fritzing/blob/master/Sharp%20PC817.fzpz)
