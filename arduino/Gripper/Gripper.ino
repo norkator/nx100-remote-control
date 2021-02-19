@@ -46,10 +46,12 @@ void loop() {
   if (!homingDone) {
     // homing();
   }
-  
-  delay(1000);
-  myStepper.step(2500);
 
+  int rInputVal = digitalRead(robotInput);
+  if (rInputVal == LOW) {
+    // delay(1000);
+    myStepper.step(2500);
+  }
 
   // Todo, robot gives gripper close position value command, 
   // move gripper to wanted position and set output HIGH to acknowledge
