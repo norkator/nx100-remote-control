@@ -13,9 +13,11 @@ int motorA1 = 2;
 int motorA2 = 3;
 int motorB1 = 4;
 int motorB2 = 5;
-int endStop = 6;
-int robotInput = 7;
-int robotOutput = 8;
+int endStop = 6; // homing endstop
+int robotInput = 7; // close|open signal
+int robotOutput = 8; // acknowledge signal
+int holdOutput = 9; // gripper hit something
+int hitSensor = 10; // hit signal trigger
 
 // Variables
 boolean homingDone = false;
@@ -24,6 +26,7 @@ const int stepperMotorSpeed = 300;    // stepper motor speed
 const int gripperStepsFullyOpen = -5000; // how many steps needed to reverse when gripper is fully open
 Stepper myStepper(stepsPerRevolution, motorA1, motorA2, motorB1, motorB2);
 int currentStepPosition = 0;
+boolean holdOn = false;
 
 
 // SETUP
@@ -37,6 +40,11 @@ void setup() {
   // NX100 output
   pinMode(robotOutput, OUTPUT);
   digitalWrite(robotOutput, LOW); // off
+  // Robot hold output
+  pinMode(holdOutput, OUTPUT);
+  digitalWrite(holdOutput, LOW); // off
+  // Hit sensor (switch)
+  pinMode(hitSensor, INPUT_PULLUP);
   // Init stepper
   myStepper.setSpeed(stepperMotorSpeed);
   Serial.println("Setup ok");
@@ -68,6 +76,24 @@ void loop() {
       myStepper.step(gripperStepsFullyOpen);
       currentStepPosition = gripperStepsFullyOpen;
       digitalWrite(robotOutput, LOW); // acknowledge open
+    }
+  }
+
+
+  // Gripper hit switch trigger action
+  // will turn robot hold on, hold can be manualle released from robot pendant
+  int hInputVal = digitalRead(hitSensor);
+  if (hInputVal == LOW) {
+    if (holdOn == false) {
+      Serial.println("Gipper hit -> turning hold on!");
+      digitalWrite(holdOutput, HIGH); // hold on
+      holdOn = true;
+    }
+  } else {
+    if (holdOn == true) {
+      Serial.println("Gipper ok -> turning hold off!");
+      digitalWrite(holdOutput, LOW); // hold off
+      holdOn = false;
     }
   }
 
