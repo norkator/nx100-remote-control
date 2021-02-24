@@ -4,7 +4,7 @@ from objects import MoveL
 
 
 def start_app():
-    WebServer.run(addr="localhost", port=8080)  # 0.0.0.0 (available from host ip)
+    # WebServer.run(addr="localhost", port=8080)  # 0.0.0.0 (available from host ip)
     # Commands.read_alarms()
     # Commands.read_current_joint_coordinate_position()
     # Commands.read_current_specified_coordinate_system_position('0', '0')
@@ -22,6 +22,7 @@ def start_app():
     #     Utils.binary_to_decimal(0x00000001),
     #     0, 0, 0, 0, 0, 0, 0
     # ))
+    Commands.read_io_signals(0, 8)
 
 
 start_app()
