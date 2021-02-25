@@ -23,7 +23,11 @@ Documents
 Documents for development
 
 * [Ethernet Server Function Manual](https://drive.google.com/file/d/11TY9v_Tb5k23DTz9VuEBmj-vJE5Fmc4R/view) 
-* [Youtube demo](https://youtu.be/9swshogfL1c)
+    * This document has information about http socket working.
+* [Concurrent I/O Manual](https://drive.google.com/file/d/1Dhij10r6Mk60-kloPwJcXpPA7n-u2KN2/view?usp=sharing)
+    * Remote IO signal outputs, inputs, all other IO signals and ladder programming information.
+* [Youtube demo promo 1](https://youtu.be/9swshogfL1c)
+    * First promo video about progress of this repository.
 
 
 Goals
@@ -32,6 +36,7 @@ Goals
 * Simple web page for basic control and monitoring.
 * Usable functions and response parsers to work as part of other Python apps.
 * Key input functionality for moving robot with keyboard or controller.
+* Be able to control NX100 IO card signal outputs and read input states.
 
 
 
