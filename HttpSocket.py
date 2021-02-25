@@ -1,6 +1,6 @@
 from module import Commands, Utils
 from module import WebServer
-from objects import MoveL
+from objects import MoveL, IO
 
 
 def start_app():
@@ -22,7 +22,13 @@ def start_app():
     #     Utils.binary_to_decimal(0x00000001),
     #     0, 0, 0, 0, 0, 0, 0
     # ))
-    Commands.read_io_signals(0, 8)
+    Commands.read_io_signals(IO.IO(22010, 8))
+
+    '''
+    io_out = IO.IO(22010, 8)
+    io_out.set_first_eight_io_contracts('00000000')
+    Commands.write_io_signals(io_out)
+    '''
 
 
 start_app()

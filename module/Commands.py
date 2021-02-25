@@ -120,9 +120,9 @@ def write_linear_move(move_l):
 
 
 # Reads I/O signals, contact point No. to start read-out, the number of contact points to be read out
-def read_io_signals(contact_point_start_no=0, num_of_contact_points_to_read=8):
+def read_io_signals(io):
     response = Response.Response(Socket.exec_single_command(
-        Command.Command("IOREAD", (str(contact_point_start_no) + ', ' + str(num_of_contact_points_to_read))))
+        Command.Command("IOREAD", io.get_io_read_command()))
     )
     Utils.print_response_details(response.get_response())
     print('[i] IO read command run successfully!' if response.is_success() else '[E] IO read command run failed!')
@@ -130,9 +130,9 @@ def read_io_signals(contact_point_start_no=0, num_of_contact_points_to_read=8):
 
 
 # Write I/O signals
-def write_io_signals(contact_point_start_no=0, num_of_contact_points_to_write=8):
+def write_io_signals(io):
     response = Response.Response(Socket.exec_single_command(
-        Command.Command("IOWRITE", (str(contact_point_start_no) + ', ' + str(num_of_contact_points_to_write))))
+        Command.Command("IOWRITE", io.get_io_write_command()))
     )
     Utils.print_response_details(response.get_response())
     print('[i] IO write command run successfully!' if response.is_success() else '[E] IO write command run failed!')
