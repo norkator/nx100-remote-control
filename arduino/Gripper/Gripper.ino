@@ -14,9 +14,9 @@ int motorA2 = 3;
 int motorB1 = 4;
 int motorB2 = 5;
 int endStop = 6; // homing endstop
-int robotInput = 7; // close|open signal
-int robotOutput = 8; // acknowledge signal
-int holdOutput = 9; // gripper hit something
+int robotInput = 7; // close|open signal (PC817)
+int robotOutput = 8; // acknowledge signal (using relay)
+int holdOutput = 9; // gripper hit something (using relay)
 int hitSensor = 10; // hit signal trigger
 
 // Variables
@@ -39,10 +39,10 @@ void setup() {
   pinMode(robotInput, INPUT_PULLUP);
   // NX100 output
   pinMode(robotOutput, OUTPUT);
-  digitalWrite(robotOutput, LOW); // off
+  digitalWrite(robotOutput, HIGH); // off
   // Robot hold output
   pinMode(holdOutput, OUTPUT);
-  digitalWrite(holdOutput, LOW); // off
+  digitalWrite(holdOutput, HIGH); // off
   // Hit sensor (switch)
   pinMode(hitSensor, INPUT_PULLUP);
   // Init stepper
@@ -67,7 +67,7 @@ void loop() {
       Serial.println("Closing gripper");
       myStepper.step(newPos);
       currentStepPosition = newPos;
-      digitalWrite(robotOutput, HIGH); // acknowledge closed
+      digitalWrite(robotOutput, LOW); // acknowledge closed
     }
   } else {
     // opening gripper
@@ -75,7 +75,7 @@ void loop() {
       Serial.println("Opening gripper");
       myStepper.step(gripperStepsFullyOpen);
       currentStepPosition = gripperStepsFullyOpen;
-      digitalWrite(robotOutput, LOW); // acknowledge open
+      digitalWrite(robotOutput, HIGH); // acknowledge open
     }
   }
 
@@ -86,13 +86,13 @@ void loop() {
   if (hInputVal == LOW) {
     if (holdOn == false) {
       Serial.println("Gipper hit -> turning hold on!");
-      digitalWrite(holdOutput, HIGH); // hold on
+      digitalWrite(holdOutput, LOW); // hold on
       holdOn = true;
     }
   } else {
     if (holdOn == true) {
       Serial.println("Gipper ok -> turning hold off!");
-      digitalWrite(holdOutput, LOW); // hold off
+      digitalWrite(holdOutput, HIGH); // hold off
       holdOn = false;
     }
   }
