@@ -1,10 +1,13 @@
-from module import Commands, Utils
-from module import WebServer
-from objects import MoveL
+"""
+This is used for development, individual command testing
+"""
+
+
+from module import Commands, Utils, Gripper
+from objects import MoveL, IO
 
 
 def start_app():
-    WebServer.run(addr="localhost", port=8080)  # 0.0.0.0 (available from host ip)
     # Commands.read_alarms()
     # Commands.read_current_joint_coordinate_position()
     # Commands.read_current_specified_coordinate_system_position('0', '0')
@@ -22,6 +25,11 @@ def start_app():
     #     Utils.binary_to_decimal(0x00000001),
     #     0, 0, 0, 0, 0, 0, 0
     # ))
+    # Gripper.write_gripper_close()
+    # Gripper.write_gripper_open()
+    # Gripper.read_gripper_closed_command_register()
+    Gripper.read_gripper_acknowledge()
+    # Gripper.read_gripper_hit()
 
 
 start_app()
