@@ -11,8 +11,10 @@ Table of contents
 * [Documents](#documents)
 * [Goals](#goals)
 * [Install](#install)
-* [Arduino](#arduino)
-    * [code](#code)
+* [Programs](#programs)
+* [Arduino gripper](#arduino-gripper)
+    * [Python sample](#python-sample)
+    * [Arduino code](#arduino-code)
     * [Sketch](#sketch)
     
 
@@ -49,12 +51,36 @@ Install
 
 
 
-Arduino
+Programs
+============
+
+`Testing.py` => Used for development and testing individual commands.  
+`WebServer.py` => Hosts small web page having control possibilities (repository readme photo)  
+`XboxController.py` => As name says, can use controller to control robot, just demo.  
+
+
+
+Arduino gripper
 ============
 Arduino folder contains code and sketch for custom Gripper integrated for NX100 Motoman.
 
 
-Code
+Python sample
+-------
+Work in progress with gripper.
+
+```python
+from module import Gripper
+
+Gripper.write_gripper_close()
+Gripper.write_gripper_open()
+Gripper.read_gripper_closed_command_register()
+Gripper.read_gripper_acknowledge()
+Gripper.read_gripper_hit()
+```
+
+
+Arduino code
 -------
 No notes yet.
 

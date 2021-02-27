@@ -1,3 +1,8 @@
+"""
+This is Xbox control sample
+"""
+
+
 from module import xbox360_controller, Commands, Utils
 from objects import Time, MoveL
 import pygame
