@@ -82,7 +82,12 @@ Gripper.read_gripper_hit()
 
 Arduino code
 -------
-No notes yet.
+Obvious bits are one input and two outputs. Hardware 
+decisions don't matter, code can be changed accordingly.
+
+* PC817 is used to bring NX100 IO card UNIVERSAL OUTPUT signal as input for Arduino.
+* Two relays are used to short circuit NX100 input signal line's to switch on/off 
+UNIVERSAL INPUT signal.
 
 
 
