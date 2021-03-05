@@ -125,7 +125,7 @@ def read_io_signals(io):
         Command.Command("IOREAD", io.get_io_read_command())
     ))
     Utils.print_response_details(response.get_response())
-    print('[i] IO read command run successfully!' if response.is_success() else '[E] IO read command run failed!')
+    # print('[i] IO read command run successfully!' if response.is_success() else '[E] IO read command run failed!')
     return response
 
 

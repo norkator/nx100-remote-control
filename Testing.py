@@ -25,10 +25,10 @@ def start_app():
     #     Utils.binary_to_decimal(0x00000001),
     #     0, 0, 0, 0, 0, 0, 0
     # ))
-    # Gripper.write_gripper_close()
+    Gripper.write_gripper_close()
     # Gripper.write_gripper_open()
     # Gripper.read_gripper_closed_command_register()
-    Gripper.read_gripper_acknowledge()
+    # Gripper.read_gripper_acknowledge()
     # Gripper.read_gripper_hit()
 
 

@@ -8,13 +8,13 @@ GRIPPER_HIT_SIGNAL = 27  # Universal Input IO signal register
 
 
 def write_gripper_close():
-    io_out = IO.IO(GRIPPER_OPEN_CLOSE_SIGNAL_INPUT, 8)  # each signal line has 8 bits, write them all
+    io_out = IO.IO(GRIPPER_OPEN_CLOSE_SIGNAL_INPUT, 4)  # each signal line has 8 bits, write them all
     io_out.set_first_eight_io_contracts('00000100')  # Todo, value not decided
     Commands.write_io_signals(io_out)
 
 
 def write_gripper_open():
-    io_out = IO.IO(GRIPPER_OPEN_CLOSE_SIGNAL_INPUT, 8)  # each signal line has 8 bits, write them all
+    io_out = IO.IO(GRIPPER_OPEN_CLOSE_SIGNAL_INPUT, 4)  # each signal line has 8 bits, write them all
     io_out.set_first_eight_io_contracts('00000000')  # Todo, value not decided
     Commands.write_io_signals(io_out)
 
