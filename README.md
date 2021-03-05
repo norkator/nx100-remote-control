@@ -13,6 +13,7 @@ Table of contents
 * [Install](#install)
 * [Programs](#programs)
 * [Arduino gripper](#arduino-gripper)
+    * [Ladder changes](#ladder-changes)
     * [Python sample](#python-sample)
     * [Arduino code](#arduino-code)
     * [Sketch](#sketch)
@@ -63,6 +64,17 @@ Programs
 Arduino gripper
 ============
 Arduino folder contains code and sketch for custom Gripper integrated for NX100 Motoman.
+
+
+Ladder changes
+-------
+NX100 ladder config had by default GRP meaning grouped signals so had to ungroup them
+to gain access to output relay #30052
+![ladder-config](arduino/ladder_config.jpg) 
+
+Idea here was that I needed to be able to control relay #30052
+with stock #10022 universal output signal but also with network input #22012 signal
+and this needed STR + NOT handling for both cases (see image ladder line 0359)
 
 
 Python sample
