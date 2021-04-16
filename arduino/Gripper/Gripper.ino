@@ -22,8 +22,8 @@ int hitSensor = 10; // hit signal trigger
 // Variables
 boolean homingDone = false;
 const int stepsPerRevolution = 200;   // steps per revolution
-const int stepperMotorSpeed = 300;    // stepper motor speed
-const int gripperStepsFullyOpen = -5000; // how many steps needed to reverse when gripper is fully open
+const int stepperMotorSpeed = 150;    // stepper motor speed
+const int gripperStepsFullyOpen = -1500; // how many steps needed to reverse when gripper is fully open
 Stepper myStepper(stepsPerRevolution, motorA1, motorA2, motorB1, motorB2);
 int currentStepPosition = 0;
 boolean holdOn = false;
