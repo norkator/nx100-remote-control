@@ -9,6 +9,7 @@ See [Youtube demo video](https://youtu.be/9swshogfL1c).
 Table of contents
 =================
 * [Documents](#documents)
+    * [Youtube videos](#youtube-videos)
 * [Goals](#goals)
 * [Install](#install)
 * [Programs](#programs)
@@ -29,8 +30,13 @@ Documents for development
     * This document has information about http socket working.
 * [Concurrent I/O Manual](https://drive.google.com/file/d/1Dhij10r6Mk60-kloPwJcXpPA7n-u2KN2/view?usp=sharing)
     * Remote IO signal outputs, inputs, all other IO signals and ladder programming information.
-* [Youtube demo promo 1](https://youtu.be/9swshogfL1c)
-    * First promo video about progress of this repository.
+
+
+Youtube videos
+-----
+These videos are part of documentation.
+* [Youtube first demo promo](https://youtu.be/9swshogfL1c) related to remote control software side.
+* [Custom hardware Gripper](https://youtu.be/Cx4sLZeZK_E) related to first test of working gripper.
 
 
 Goals
