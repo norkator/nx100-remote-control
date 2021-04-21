@@ -1,15 +1,16 @@
-![promo-image](doc/web_img.png) 
-
 # Motoman NX100 - Remote Control
 
-Yaskawa Motoman NX100 industrial robot remote control ability research. 
+Yaskawa Motoman NX100 industrial robot remote control ability research for machine vision control development. 
 See [Youtube demo video](https://youtu.be/9swshogfL1c).
+
+Actual tasks will be here [Uenian33 - nx100_robotic_tasks](https://github.com/uenian33/nx100_robotic_tasks).
 
 
 Table of contents
 =================
 * [Documents](#documents)
     * [Youtube videos](#youtube-videos)
+* [Infrastructure](#infrastructure)
 * [Install](#install)
 * [Programs](#programs)
 * [Arduino gripper](#arduino-gripper)
@@ -40,13 +41,21 @@ These videos are part of documentation.
 * [Custom hardware Gripper](https://youtu.be/Cx4sLZeZK_E) related to first test of working gripper.
 
 
+Infrastructure
+============
+This is planned infrastructure for robot project with computing server.<br>
+![infra-image](doc/hardware_network.png) 
+
+
 
 Install
 ============
 
 1. Go to `/module/Socket.py` and change `nx100_address` ip address to your network robot address.
 2. Set `/module/Socket.py` MOCK_RESPONSE variable to False for real robot use or use Mock to test without robot.
-3. Run app. Web interface opens from `http://localhost:8080/`
+3. Run app. Web interface opens from `http://localhost:8080/` which looks something like this:
+
+![web-interface-image](doc/web_img.png) 
 
 
 
