@@ -10,7 +10,6 @@ Table of contents
 =================
 * [Documents](#documents)
     * [Youtube videos](#youtube-videos)
-* [Goals](#goals)
 * [Install](#install)
 * [Programs](#programs)
 * [Arduino gripper](#arduino-gripper)
@@ -26,6 +25,8 @@ Documents
 ============
 Documents for development
 
+* [Uenian33 - nx100_robotic_tasks](https://github.com/uenian33/nx100_robotic_tasks)
+    * End goal. This repository will be control origin for this robot in the future.
 * [Ethernet Server Function Manual](https://drive.google.com/file/d/11TY9v_Tb5k23DTz9VuEBmj-vJE5Fmc4R/view) 
     * This document has information about http socket working.
 * [Concurrent I/O Manual](https://drive.google.com/file/d/1Dhij10r6Mk60-kloPwJcXpPA7n-u2KN2/view?usp=sharing)
@@ -37,22 +38,6 @@ Youtube videos
 These videos are part of documentation.
 * [Youtube first demo promo](https://youtu.be/9swshogfL1c) related to remote control software side.
 * [Custom hardware Gripper](https://youtu.be/Cx4sLZeZK_E) related to first test of working gripper.
-
-
-Goals
-============
-
-This repository
-----
-* Simple web page for basic control and monitoring.
-* Usable functions and response parsers to work as part of other Python apps.
-* Key input functionality for moving robot with keyboard or controller.
-* Be able to control NX100 IO card signal outputs and read input states.
-
-End goal
-----
-End goal is to run machine vision based programs based on this repository:
-https://github.com/uenian33/nx100_robotic_tasks
 
 
 
