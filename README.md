@@ -42,10 +42,17 @@ These videos are part of documentation.
 Goals
 ============
 
+This repository
+----
 * Simple web page for basic control and monitoring.
 * Usable functions and response parsers to work as part of other Python apps.
 * Key input functionality for moving robot with keyboard or controller.
 * Be able to control NX100 IO card signal outputs and read input states.
+
+End goal
+----
+End goal is to run machine vision based programs based on this repository:
+https://github.com/uenian33/nx100_robotic_tasks
 
 
 
