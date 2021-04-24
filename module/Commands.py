@@ -137,3 +137,23 @@ def write_io_signals(io):
     Utils.print_response_details(response.get_response())
     print('[i] IO write command run successfully!' if response.is_success() else '[E] IO write command run failed!')
     return response
+
+
+# Read all registered job names
+def read_all_job_names():
+    response = Response.Response(Socket.exec_single_command(
+        Command.Command("RJDIR", "*"))  # * means to read all registered jobs
+    )
+    Utils.print_response_details(response.get_response())
+    print('[i] Read job names command run successfully!' if response.is_success()
+          else '[E] Read job names command run failed!')
+    return response
+
+
+# Set wanted job as master job
+def write_master_job(job_name):
+    response = Response.Response(Socket.exec_single_command(Command.Command("SETMJ", job_name)))
+    Utils.print_response_details(response.get_response())
+    print('[i] set master job command run successfully!' if response.is_success()
+          else '[E] set master job command run failed!')
+    return response
