@@ -6,6 +6,7 @@ Some notes for Raspberry PI side.
 Table of contents
 =================
 * [USBIP](#usbip)
+* [OV9750 3D Camera](#ov9750-3d-camera)
 
 
 USBIP
@@ -70,3 +71,43 @@ Attach remote usb device
 ```shell script
 sudo usbip attach -r <host_ip_address> -b <host_bus_id>
 ```
+
+
+OV9750 3D Camera
+============
+Camera works out of the box with Windows and Mac but not in Linux (Ubuntu).
+
+Getting camera to work with Linux is in progress. Using following command:
+```shell script
+hwinfo --usb
+```
+
+Got following output:
+```shell script
+03: USB 00.0: 0000 Unclassified device                          
+  [Created at usb.122]
+  Unique ID: cLrx.LvB8fpuxKC6
+  Parent ID: k4bc.orx_URqq2_3
+  SysFS ID: /devices/pci0000:00/0000:00:06.0/usb1/1-2/1-2:1.0
+  SysFS BusID: 1-2:1.0
+  Hardware Class: unknown
+  Model: "ARC International 3D USB Camera"
+  Hotplug: USB
+  Vendor: usb 0x05a3 "ARC International"
+  Device: usb 0x9750 "3D USB Camera"
+  Revision: "21.03"
+  Driver: "uvcvideo"
+  Driver Modules: "uvcvideo"
+  Device File: /dev/input/event7
+  Device Files: /dev/input/event7, /dev/input/by-path/pci-0000:00:06.0-usb-0:2:1.0-event, /dev/input/by-id/usb-3D_USB_Camera_3D_USB_Camera-event-if00
+  Device Number: char 13:71
+  Speed: 12 Mbps
+  Module Alias: "usb:v05A3p9750d2103dcEFdsc02dp01ic0Eisc01ip00in00"
+  Driver Info #0:
+    Driver Status: uvcvideo is active
+    Driver Activation Cmd: "modprobe uvcvideo"
+  Config Status: cfg=new, avail=yes, need=no, active=unknown
+  Attached to: #5 (Hub)
+```
+
+in progress...
