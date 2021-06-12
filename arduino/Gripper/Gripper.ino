@@ -18,6 +18,9 @@ int robotInput = 7; // close|open signal (PC817)
 int robotOutput = 8; // acknowledge signal (using relay)
 int holdOutput = 9; // gripper hit something (using relay)
 int hitSensor = 10; // hit signal trigger
+int sonarTrigPin = 11; // Trigger|enable pin
+int sonarEchoPin = 12; // Output signal | Echo pin
+
 
 // Variables
 boolean homingDone = false;
@@ -27,6 +30,7 @@ const int gripperStepsFullyOpen = -1500; // how many steps needed to reverse whe
 Stepper myStepper(stepsPerRevolution, motorA1, motorA2, motorB1, motorB2);
 int currentStepPosition = 0;
 boolean holdOn = false;
+long duration, cm;
 
 
 // SETUP
@@ -48,6 +52,9 @@ void setup() {
   // Init stepper
   myStepper.setSpeed(stepperMotorSpeed);
   Serial.println("Setup ok");
+  // Sonar
+  pinMode(sonarTrigPin, OUTPUT);
+  pinMode(sonarEchoPin, INPUT);
 }
 
 
@@ -57,6 +64,8 @@ void loop() {
     homing();
   }
 
+  // Sonar distance
+  readSonar();
 
   // Robot gives gripper close position value command, finally acknowledge with output signal
   int rInputVal = digitalRead(robotInput);
@@ -136,4 +145,21 @@ void turnOffStepper() {
   digitalWrite(motorA2, LOW);
   digitalWrite(motorB1, LOW);
   digitalWrite(motorB2, LOW);
+}
+
+
+/**
+ * Meassure sonar distance
+ * sonar is installed next to camera pointing directly same direction
+ * code taken from: https://randomnerdtutorials.com/complete-guide-for-ultrasonic-sensor-hc-sr04/
+ */
+void readSonar() {
+  digitalWrite(sonarTrigPin, LOW);
+  delayMicroseconds(5);
+  digitalWrite(sonarTrigPin, HIGH);
+  delayMicroseconds(10);
+  digitalWrite(sonarTrigPin, LOW);
+  duration = pulseIn(sonarEchoPin, HIGH);
+  cm = (duration/2) / 29.1;     // Divide by 29.1 or multiply by 0.0343
+  // inches = (duration/2) / 74;   // Divide by 74 or multiply by 0.0135
 }
