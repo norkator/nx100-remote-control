@@ -5,8 +5,20 @@ Some notes for Raspberry PI side.
 
 Table of contents
 =================
+* [API](#api)
 * [USBIP](#usbip)
 * [OV9750 3D Camera](#ov9750-3d-camera)
+
+
+API
+============
+Raspberry Pi hosts small Express api which is used to query i2c parameters from Arduino.
+
+
+Sonar
+-----
+`http://<pi_address>:3000/sonar`
+
 
 
 USBIP
