@@ -9,20 +9,23 @@
 // ########################
 // ## PIN CONFIGURATIONS ##
 // ########################
-int motorA1 = 2;
-int motorA2 = 3;
-int motorB1 = 4;
-int motorB2 = 5;
-int endStop = 6; // homing endstop
-int robotInput = 7; // close|open signal (PC817)
-int robotOutput = 8; // acknowledge signal (using relay)
-int holdOutput = 9; // gripper hit something (using relay)
-int hitSensor = 10; // hit signal trigger
-int sonarTrigPin = 11; // Trigger|enable pin
-int sonarEchoPin = 12; // Output signal | Echo pin
+int motorA1       = 2;  // stepper A1
+int motorA2       = 3;  // stepper A2
+int motorB1       = 4;  // stepper B1
+int motorB2       = 5;  // stepper B2
+int endStop       = 6;  // homing endstop
+int robotInput    = 7;  // close|open signal (PC817)
+int robotOutput   = 8;  // acknowledge signal (using relay)
+int holdOutput    = 9;  // gripper hit something (using relay)
+int hitSensor     = 10; // hit signal trigger
+int sonarTrigPin  = 11; // Trigger|enable pin
+int sonarEchoPin  = 12; // Output signal | Echo pin
+int I2C_SDA_PIN   = A4; // SDA for i2C
+int I2C_SCL_PIN   = A5; // SCL for i2C
 
 
 // Variables
+int I2C_ADDRESS = 8; // randomly chosen address
 boolean homingDone = false;
 const int stepsPerRevolution = 200;   // steps per revolution
 const int stepperMotorSpeed = 150;    // stepper motor speed
@@ -30,7 +33,7 @@ const int gripperStepsFullyOpen = -1500; // how many steps needed to reverse whe
 Stepper myStepper(stepsPerRevolution, motorA1, motorA2, motorB1, motorB2);
 int currentStepPosition = 0;
 boolean holdOn = false;
-long duration, cm;
+long duration = 0, cm = 0;
 
 
 // SETUP
@@ -55,6 +58,10 @@ void setup() {
   // Sonar
   pinMode(sonarTrigPin, OUTPUT);
   pinMode(sonarEchoPin, INPUT);
+  // Join i2c bus with address
+  Wire.setClock(10000);
+  Wire.begin(I2C_ADDRESS); 
+  Wire.onReceive(receiveCommand);
 }
 
 
@@ -162,4 +169,23 @@ void readSonar() {
   duration = pulseIn(sonarEchoPin, HIGH);
   cm = (duration/2) / 29.1;     // Divide by 29.1 or multiply by 0.0343
   // inches = (duration/2) / 74;   // Divide by 74 or multiply by 0.0135
+}
+
+
+/**
+ * i2c receive command
+ * Raspberry Pi will command nano to do something
+ */
+void receiveCommand(int byteCount) {
+  String cmd = "";
+  while (1 < Wire.available()) { // loop through all but the last
+    char c = Wire.read(); // receive byte as a character
+    cmd += c;
+    Serial.print(c);         // print the character
+  }
+  Serial.println("");
+  Wire.read();    // receive byte as an integer
+  if (cmd == "sonar_distance") {
+    Wire.write(cm);
+  }
 }
