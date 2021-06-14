@@ -34,6 +34,8 @@ Stepper myStepper(stepsPerRevolution, motorA1, motorA2, motorB1, motorB2);
 int currentStepPosition = 0;
 boolean holdOn = false;
 long duration = 0, cm = 0;
+unsigned long sonarStartMillis;
+unsigned long sonarCurrentMillis;
 
 
 // SETUP
@@ -161,14 +163,20 @@ void turnOffStepper() {
  * code taken from: https://randomnerdtutorials.com/complete-guide-for-ultrasonic-sensor-hc-sr04/
  */
 void readSonar() {
-  digitalWrite(sonarTrigPin, LOW);
-  delayMicroseconds(5);
-  digitalWrite(sonarTrigPin, HIGH);
-  delayMicroseconds(10);
-  digitalWrite(sonarTrigPin, LOW);
-  duration = pulseIn(sonarEchoPin, HIGH);
-  cm = (duration/2) / 29.1;     // Divide by 29.1 or multiply by 0.0343
-  // inches = (duration/2) / 74;   // Divide by 74 or multiply by 0.0135
+  sonarCurrentMillis = millis();
+  if (sonarCurrentMillis - sonarStartMillis >= 500) {
+    sonarStartMillis = sonarCurrentMillis;
+    digitalWrite(sonarTrigPin, LOW);
+    delayMicroseconds(5);
+    digitalWrite(sonarTrigPin, HIGH);
+    delayMicroseconds(10);
+    digitalWrite(sonarTrigPin, LOW);
+    duration = pulseIn(sonarEchoPin, HIGH);
+    cm = duration * 0.034 / 2;
+    Serial.print("Sonar dist: ");
+    Serial.println(cm);
+    // inches = (duration/2) / 74;   // Divide by 74 or multiply by 0.0135
+  }
 }
 
 
@@ -185,6 +193,8 @@ void receiveCommand(int byteCount) {
   }
   Serial.println("");
   Wire.read();    // receive byte as an integer
+  Serial.print("i2c command in: ");
+  Serial.println(cmd);
   if (cmd == "sonar_distance") {
     Wire.write(cm);
   }
