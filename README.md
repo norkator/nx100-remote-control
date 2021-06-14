@@ -119,3 +119,4 @@ Custom part sources
 * [L298 Stepper Driver](https://forum.fritzing.org/uploads/short-url/cOmtO5zuLdoAiea5hppdo0YsU1N.fzpz)
 * [LM2596 Step Down Module](https://forum.fritzing.org/uploads/default/original/2X/8/876018ce35bcc333dd7083f3bbbc5dcc86a9fb20.fzpz)
 * [PC817 Opto-isolator](https://github.com/RafaGS/Fritzing/blob/master/Sharp%20PC817.fzpz)
+* [HC-SR04 Sonar](https://fritzing-data.s3.eu-central-1.amazonaws.com/0ec82cd976950bb5439acdd825c9c8c1.fzpz?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=AKIA2HCNQME5J5JNR5LX%2F20210612%2Feu-central-1%2Fs3%2Faws4_request&X-Amz-Date=20210612T133948Z&X-Amz-Expires=900&X-Amz-SignedHeaders=host&X-Amz-Signature=368c32cdbce2a5ce10266e8599b724db47e37fa24c7fefffe923d4e05937c0f1)

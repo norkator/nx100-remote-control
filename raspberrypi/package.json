@@ -1,0 +1,15 @@
+{
+  "name": "raspberrypi",
+  "version": "1.0.0",
+  "description": "NX100 Raspberry Pi side i2c api",
+  "main": "index.js",
+  "repository": "https://github.com/norkator/nx100-remote-control",
+  "author": "Martin Kankaanranta",
+  "license": "MIT",
+  "private": true,
+  "dependencies": {
+    "express": "4.17.1",
+    "raspi": "6.0.1",
+    "raspi-i2c": "6.2.4"
+  }
+}

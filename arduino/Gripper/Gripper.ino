@@ -9,17 +9,24 @@
 // ########################
 // ## PIN CONFIGURATIONS ##
 // ########################
-int motorA1 = 2;
-int motorA2 = 3;
-int motorB1 = 4;
-int motorB2 = 5;
-int endStop = 6; // homing endstop
-int robotInput = 7; // close|open signal (PC817)
-int robotOutput = 8; // acknowledge signal (using relay)
-int holdOutput = 9; // gripper hit something (using relay)
-int hitSensor = 10; // hit signal trigger
+int motorA1       = 2;  // stepper A1
+int motorA2       = 3;  // stepper A2
+int motorB1       = 4;  // stepper B1
+int motorB2       = 5;  // stepper B2
+int endStop       = 6;  // homing endstop
+int robotInput    = 7;  // close|open signal (PC817)
+int robotOutput   = 8;  // acknowledge signal (using relay)
+int holdOutput    = 9;  // gripper hit something (using relay)
+int hitSensor     = 10; // hit signal trigger
+int sonarTrigPin  = 11; // Trigger|enable pin
+int sonarEchoPin  = 12; // Output signal | Echo pin
+int I2C_SDA_PIN   = A4; // SDA for i2C
+int I2C_SCL_PIN   = A5; // SCL for i2C
+
 
 // Variables
+int I2C_ADDRESS = 8; // randomly chosen address
+byte CMD;
 boolean homingDone = false;
 const int stepsPerRevolution = 200;   // steps per revolution
 const int stepperMotorSpeed = 150;    // stepper motor speed
@@ -27,6 +34,9 @@ const int gripperStepsFullyOpen = -1500; // how many steps needed to reverse whe
 Stepper myStepper(stepsPerRevolution, motorA1, motorA2, motorB1, motorB2);
 int currentStepPosition = 0;
 boolean holdOn = false;
+long duration = 0, cm = 0;
+unsigned long sonarStartMillis;
+unsigned long sonarCurrentMillis;
 
 
 // SETUP
@@ -48,6 +58,14 @@ void setup() {
   // Init stepper
   myStepper.setSpeed(stepperMotorSpeed);
   Serial.println("Setup ok");
+  // Sonar
+  pinMode(sonarTrigPin, OUTPUT);
+  pinMode(sonarEchoPin, INPUT);
+  // Join i2c bus with address
+  Wire.setClock(10000);
+  Wire.begin(I2C_ADDRESS);
+  Wire.onRequest(onRequestData);
+  Wire.onReceive(onReceiveData);
 }
 
 
@@ -57,6 +75,8 @@ void loop() {
     homing();
   }
 
+  // Sonar distance
+  readSonar();
 
   // Robot gives gripper close position value command, finally acknowledge with output signal
   int rInputVal = digitalRead(robotInput);
@@ -136,4 +156,61 @@ void turnOffStepper() {
   digitalWrite(motorA2, LOW);
   digitalWrite(motorB1, LOW);
   digitalWrite(motorB2, LOW);
+}
+
+
+/**
+ * Meassure sonar distance
+ * sonar is installed next to camera pointing directly same direction
+ * code taken from: https://randomnerdtutorials.com/complete-guide-for-ultrasonic-sensor-hc-sr04/
+ */
+void readSonar() {
+  sonarCurrentMillis = millis();
+  if (sonarCurrentMillis - sonarStartMillis >= 500) {
+    sonarStartMillis = sonarCurrentMillis;
+    digitalWrite(sonarTrigPin, LOW);
+    delayMicroseconds(5);
+    digitalWrite(sonarTrigPin, HIGH);
+    delayMicroseconds(10);
+    digitalWrite(sonarTrigPin, LOW);
+    duration = pulseIn(sonarEchoPin, HIGH);
+    cm = duration * 0.034 / 2;
+    // Serial.print("Sonar dist: ");
+    // Serial.println(cm);
+    // inches = (duration/2) / 74;   // Divide by 74 or multiply by 0.0135
+  }
+}
+
+
+/**
+ * i2c request handler
+ */
+void onRequestData() {
+  float data[4];
+  uint8_t buf[32]; // buffer in which to build block.
+  uint8_t len=0;
+  if (CMD == 0x01) {
+    memmove(&buf[len],(uint8_t*)&cm,sizeof(cm));
+    len += sizeof(cm);
+  } else if (CMD == 0x02) {
+    memmove(&buf[len],(uint8_t*)&currentStepPosition,sizeof(currentStepPosition));
+    len += sizeof(currentStepPosition);
+  } else {
+    long empty = 0;
+    memmove(&buf[len],(uint8_t*)&empty,sizeof(empty));
+    len += sizeof(empty);
+  }
+  Wire.write(buf,len);
+  Wire.write((byte*) &data, 4*sizeof(float)); 
+}
+
+
+/**
+ * i2c receive handler
+ * Raspberry Pi will command nano to do something
+ */
+void onReceiveData(int byteCount) {
+   if (Wire.available() > 0) {
+      CMD = Wire.read();
+   }
 }

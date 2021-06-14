@@ -5,8 +5,34 @@ Some notes for Raspberry PI side.
 
 Table of contents
 =================
+* [API](#api)
+    * [Setup](#setup)
+    * [Sonar](#sonar)
 * [USBIP](#usbip)
 * [OV9750 3D Camera](#ov9750-3d-camera)
+
+
+API
+============
+Raspberry Pi hosts small Express api which is used to query i2c parameters from Arduino.
+
+Setup
+-----
+NodeJS >12.x must be installed and after files has been transferred to PI must run:
+
+```shell script
+sudo npm install
+sudo npm install -g pm2
+sudo pm2 start index.js
+sudo pm2 save
+```
+
+
+Sonar
+-----
+`http://<pi_address>:3000/sonar`
+returns sonar distance value object with key `cm` which describes measured centimeters.
+
 
 
 USBIP
