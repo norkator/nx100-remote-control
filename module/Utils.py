@@ -8,7 +8,7 @@ def utf8len(s):
 
 # get byte length for command data
 def command_data_length(command):
-    if len(command.data) is 0:
+    if len(command.data) == 0:
         return 0
     else:
         return utf8len(command.data + CR)

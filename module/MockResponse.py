@@ -38,27 +38,27 @@ MOVL = "b'0000\\r\\n'"
 
 
 def get_mock_response(command):
-    if command.name is 'RALARM':
+    if command.name == 'RALARM':
         return RALARM
-    elif command.name is 'RPOSJ':
+    elif command.name == 'RPOSJ':
         return RPOSJ
-    elif command.name is 'RPOSC':
+    elif command.name == 'RPOSC':
         return RPOSC
-    elif command.name is 'RSTATS':
+    elif command.name == 'RSTATS':
         return RSTATS
-    elif command.name is 'RJSEQ':
+    elif command.name == 'RJSEQ':
         return RJSEQ
-    elif command.name is 'HOLD':
+    elif command.name == 'HOLD':
         return HOLD
-    elif command.name is 'RESET':
+    elif command.name == 'RESET':
         return RESET
-    elif command.name is 'CANCEL':
+    elif command.name == 'CANCEL':
         return CANCEL
-    elif command.name is 'SVON':
+    elif command.name == 'SVON':
         return SVON
-    elif command.name is 'START':
+    elif command.name == 'START':
         return START
-    elif command.name is 'MOVL':
+    elif command.name == 'MOVL':
         return MOVL
     else:
         return '[E] no mock response for given command ' + command.name
