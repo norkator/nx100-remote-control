@@ -40,6 +40,7 @@ Youtube videos
 These videos are part of documentation.
 * [Youtube first demo promo](https://youtu.be/9swshogfL1c) related to remote control software side.
 * [Custom hardware Gripper](https://youtu.be/Cx4sLZeZK_E) related to first test of working gripper.
+* [Calibrating and testing ML pipeline](https://youtu.be/NBE9e7AJw6I) related to first tests with machine learning based control.
 
 
 Infrastructure
