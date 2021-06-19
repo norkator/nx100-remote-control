@@ -7,7 +7,7 @@ class Gripper(object):
         self.is_hit = False
 
     def set_closed_status(self, register_value):
-        self.is_closed = True if register_value is '4' else False
+        self.is_closed = True if int(register_value) is 32 else False
 
     def is_gripper_closed(self):
         return self.is_closed

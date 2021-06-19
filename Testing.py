@@ -25,14 +25,17 @@ def start_app():
     #     Utils.binary_to_decimal(0x00000001),
     #     0, 0, 0, 0, 0, 0, 0
     # ))
-    Commands.read_all_job_names()
-    Commands.write_master_job('job_name_here')
+    # Commands.read_all_job_names()
+    # Commands.write_master_job('job_name_here')
 
 
     # Gripper.write_gripper_close()
     # Gripper.write_gripper_open()
     # Gripper.read_gripper_closed_command_register()
-    # Gripper.read_gripper_acknowledge()
+
+    # Gripper.write_gripper_close()
+    print(Gripper.gripper_is_closed())
+
     # Gripper.read_gripper_hit()
 
 
