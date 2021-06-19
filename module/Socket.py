@@ -35,7 +35,7 @@ def exec_single_command(command):
     # command request
     cmd_data_length = Utils.command_data_length(command)
     command_request = "HOSTCTRL_REQUEST " + command.name + " " + str(cmd_data_length) + CRLF
-    print('Sending command: ' + command_request)
+    # print('Sending command: ' + command_request)
     client.send(command_request.encode())
     response = client.recv(4096)
     command_response = repr(response)

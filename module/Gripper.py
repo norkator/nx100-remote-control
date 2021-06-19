@@ -32,7 +32,7 @@ def read_gripper_closed_command_register():
 def read_gripper_acknowledge():
     gripper_status = Gripper.Gripper()
     res = Commands.read_io_signals(IO.IO(GRIPPER_ACKNOWLEDGE_SIGNAL, 1)).get_response()
-    print('Gripper ack decimal: ' + res)
+    # print('Gripper ack decimal: ' + res)
     gripper_status.set_closed_status(res)
     return gripper_status.is_gripper_closed()
 
@@ -41,7 +41,7 @@ def read_gripper_acknowledge():
 def gripper_is_closed():
     gripper_status = Gripper.Gripper()
     res = Commands.read_io_signals(IO.IO(GRIPPER_ACKNOWLEDGE_SIGNAL, 1)).get_response()
-    print('Gripper ack decimal: ' + res)
+    # print('Gripper ack decimal: ' + res)
     gripper_status.set_closed_status(res)
     return gripper_status.is_gripper_closed()
 
