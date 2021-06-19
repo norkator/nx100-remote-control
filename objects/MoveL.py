@@ -1,6 +1,15 @@
 class MoveL(object):
     # https://drive.google.com/file/d/11TY9v_Tb5k23DTz9VuEBmj-vJE5Fmc4R/view
 
+    # motion_speed_selection options
+    motion_speed_selection_post_speed = 0  # this option will do fast angle speeds
+    motion_speed_selection_posture_speed = 1  # this option does smoother angle speeds defined by motion_speed variable
+
+    # coordinate_specification options
+    coordinate_specification_base_coordinate = 0  # base coordinate option
+    coordinate_specification_robot_coordinate = 1  # robot coordinate option
+    coordinate_specification_user_1_coordinate = 2  # user 1 coordinate option
+
     # Class constructor
     def __init__(self, motion_speed_selection, motion_speed, coordinate_specification,
                  x, y, z, tx, ty, tz, d_10, d_11=0, d_12=0, d_13=0, d_14=0, d_15=0, d_16=0, d_17=0):

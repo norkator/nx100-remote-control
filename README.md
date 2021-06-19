@@ -13,6 +13,7 @@ Table of contents
 * [Infrastructure](#infrastructure)
 * [Install](#install)
 * [Programs](#programs)
+* [MoveL](#movel)
 * [Arduino gripper](#arduino-gripper)
     * [Ladder changes](#ladder-changes)
     * [Python sample](#python-sample)
@@ -65,6 +66,28 @@ Programs
 `Testing.py` => Used for development and testing individual commands.  
 `WebServer.py` => Hosts small web page having control possibilities (repository readme photo)  
 `XboxController.py` => As name says, can use controller to control robot, just demo.  
+
+
+MoveL
+============
+Quick sample for MovL command to do linear movement with robot. 
+See MoveL object for more details or read `Ethernet Server Function Manual`.
+
+```python
+from module import Commands, Utils
+from objects import MoveL
+
+Commands.write_linear_move(MoveL.MoveL(
+    MoveL.MoveL.motion_speed_selection_posture_speed,
+    5,
+    MoveL.MoveL.coordinate_specification_base_coordinate,
+    353.769, 202.779, 120.658,
+    -1.34, 35.78, 27.84,
+    Utils.binary_to_decimal(0x00000001),
+    0, 0, 0, 0, 0, 0, 0
+))
+```
+Use MoveL.MoveL object to see options for `motion_speed_selection_` and for `coordinate_specification_`
 
 
 
