@@ -1,6 +1,12 @@
 from module import Commands
 from objects import IO, Gripper
 
+'''
+These signals are this repository end goal specific
+following gripper and its signals are custom device not supplied by Motoman
+dont run these commands with actual robot with other hardware connected into these signal registers
+'''
+
 GRIPPER_OPEN_CLOSE_SIGNAL_INPUT = 22010  # first network input signal (only input method)
 GRIPPER_OPEN_CLOSE_SIGNAL = 10022  # Universal Output IO signal register
 GRIPPER_ACKNOWLEDGE_SIGNAL = 25  # Universal Input IO signal register

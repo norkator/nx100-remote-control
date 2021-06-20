@@ -36,6 +36,9 @@ START = "b'0000\\r\\n'"
 # noinspection SpellCheckingInspection
 MOVL = "b'0000\\r\\n'"
 
+# noinspection SpellCheckingInspection
+IOREAD = "b'0\\r\\n'"
+
 
 def get_mock_response(command):
     if command.name == 'RALARM':
@@ -60,5 +63,7 @@ def get_mock_response(command):
         return START
     elif command.name == 'MOVL':
         return MOVL
+    elif command.name == 'IOREAD':
+        return IOREAD
     else:
         return '[E] no mock response for given command ' + command.name
