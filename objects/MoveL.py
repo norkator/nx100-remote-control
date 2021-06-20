@@ -52,3 +52,24 @@ class MoveL(object):
             str(self.d_16),
             str(self.d_17)
         ])
+
+    def get_coordinate_specification(self):
+        return self.coordinate_specification
+
+    def get_x(self):
+        return self.x
+
+    def get_y(self):
+        return self.y
+
+    def get_z(self):
+        return self.z
+
+    def get_tx(self):
+        return self.tx
+
+    def get_ty(self):
+        return self.ty
+
+    def get_tz(self):
+        return self.tz

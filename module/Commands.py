@@ -1,5 +1,6 @@
-from module import Socket, Utils
 from objects import Command, Status, JobDetail, CurrentPos, Alarm, Response
+from module import Socket, Utils
+import time
 
 
 # Reads the error alarm code
@@ -117,6 +118,30 @@ def write_linear_move(move_l):
     # Utils.print_response_details(response_data)
     print('[i] command run successfully!' if response.is_success() else '[E] command run failed!')
     return response
+
+
+# Is robot in target point function with callback. Timeout given in seconds
+def robot_in_target_point(move_l, timeout=10, _callback_success=None, _callback_failed=None):
+    current = 0
+    for x in range(timeout):
+        time.sleep(1)
+        cp = read_current_specified_coordinate_system_position(  # returns CurrentPos object
+            str(move_l.get_coordinate_specification), '0'
+        )
+        if cp.get_x() == move_l.get_x() and cp.get_y() == move_l.get_y() and cp.get_z() == move_l.get_z() and cp.get_tx() == move_l.get_tx() and cp.get_ty() == move_l.get_ty() and cp.get_tz() == move_l.get_tz():
+            if _callback_success:
+                _callback_success()
+                break
+            else:
+                return True
+        else:
+            current = current + 1
+            if current == timeout:
+                if _callback_failed:
+                    _callback_failed()
+                    break
+                else:
+                    return False
 
 
 # Reads I/O signals, contact point No. to start read-out, the number of contact points to be read out
