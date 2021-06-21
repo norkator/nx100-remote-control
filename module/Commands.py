@@ -128,7 +128,7 @@ def robot_in_target_point_callback(move_l, timeout=10, _callback_success=None, _
         cp = read_current_specified_coordinate_system_position(  # returns CurrentPos object
             str(move_l.get_coordinate_specification), '0'
         )
-        if cp.get_x() == move_l.get_x() and cp.get_y() == move_l.get_y() and cp.get_z() == move_l.get_z() and cp.get_tx() == move_l.get_tx() and cp.get_ty() == move_l.get_ty() and cp.get_tz() == move_l.get_tz():
+        if Utils.is_in_position(move_l, cp):
             if _callback_success:
                 _callback_success()
                 break
