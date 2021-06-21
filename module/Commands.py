@@ -121,7 +121,7 @@ def write_linear_move(move_l):
 
 
 # Is robot in target point function with callback. Timeout given in seconds
-def robot_in_target_point(move_l, timeout=10, _callback_success=None, _callback_failed=None):
+def robot_in_target_point_callback(move_l, timeout=10, _callback_success=None, _callback_failed=None):
     current = 0
     for x in range(timeout):
         time.sleep(1)

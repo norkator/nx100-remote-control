@@ -112,7 +112,7 @@ move_l = MoveL.MoveL(
     0, 0, 0, 0, 0, 0, 0
 )
     
-Commands.robot_in_target_point(
+Commands.robot_in_target_point_callback(
     move_l=move_l, timeout=10, _callback_success=callback_success, _callback_failed=callback_failed
 )
 ```
