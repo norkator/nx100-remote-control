@@ -90,7 +90,7 @@ Commands.write_linear_move(MoveL.MoveL(
 ```
 Use MoveL.MoveL object to see options for `motion_speed_selection_` and for `coordinate_specification_`
 
-Then to wait for move to be completed you can use function as example:
+Then to wait for move to be completed you can use callback function as example:
 
 ```python
 from module import Commands, Utils
@@ -119,6 +119,26 @@ Commands.robot_in_target_point_callback(
 
 So this will exec `_callback_success` if position reached in given timeout or run `_callback_failed` if not.
 
+Another commander class way
+
+```python
+from module import LinearMove, Utils
+from objects import MoveL
+    
+move_l = MoveL.MoveL(
+    MoveL.MoveL.motion_speed_selection_posture_speed,
+    5,
+    MoveL.MoveL.coordinate_specification_base_coordinate,
+    352.769, 202.779, 120.658,
+    -1.34, 35.78, 27.84,
+    Utils.binary_to_decimal(0x00000001),
+    0, 0, 0, 0, 0, 0, 0
+)
+
+linear_move = LinearMove.LinearMove()
+linear_move.go(move_l=move_l, wait=True, poll_limit_seconds=10)
+print('finished')
+```
 
 Arduino gripper
 ============
