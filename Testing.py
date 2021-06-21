@@ -2,7 +2,7 @@
 This is used for development, individual command testing
 """
 
-from module import Commands, Utils, Gripper
+from module import Commands, Utils, Gripper, LinearMove
 from objects import MoveL, IO
 
 
@@ -60,6 +60,19 @@ def start_app():
     # Commands.robot_in_target_point_callback(
     #     move_l=move_l, timeout=10, _callback_success=callback_success, _callback_failed=callback_failed
     # )
+
+    # move_l = MoveL.MoveL(
+    #     MoveL.MoveL.motion_speed_selection_posture_speed,
+    #     5,
+    #     MoveL.MoveL.coordinate_specification_base_coordinate,
+    #     352.769, 202.779, 120.658,
+    #     -1.34, 35.78, 27.84,
+    #     Utils.binary_to_decimal(0x00000001),
+    #     0, 0, 0, 0, 0, 0, 0
+    # )
+    # linear_move = LinearMove.LinearMove()
+    # linear_move.go(move_l=move_l, wait=True, poll_limit_seconds=10)
+    # print('finished')
 
 
 start_app()
