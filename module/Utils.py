@@ -46,3 +46,10 @@ def clean_response(response):
         .replace('b\'', '') \
         .replace('\\r\'', '') \
         .replace('\\r\\n\'', '')
+
+
+# noinspection DuplicatedCode
+def is_in_position(move_l, cp):
+    return cp.get_x() == move_l.get_x() and cp.get_y() == move_l.get_y() \
+           and cp.get_z() == move_l.get_z() and cp.get_tx() == move_l.get_tx() \
+           and cp.get_ty() == move_l.get_ty() and cp.get_tz() == move_l.get_tz()
