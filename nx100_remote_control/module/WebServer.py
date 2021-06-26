@@ -103,7 +103,7 @@ class S(BaseHTTPRequestHandler):
                 Utils.binary_to_decimal(0x00000001)
             ))
         # Todo, do not use, ultra dangerous
-        # Todo, why causes robot to go 100% speed?
+        # Todo, implement these some day with posture speed option
         # elif command == 'move_r_l' or command == 'move_r_r':
         #     c_pos = get_position()
         #     Commands.write_linear_move(MoveL.MoveL(
