@@ -54,7 +54,12 @@ This is planned infrastructure for robot project with computing server.<br>
 Install
 ============
 
-1. You can change robot parameters via importing nx100_remote_control.
+1. Install or upgrade existing package
+   ```shell script
+   pip install nx100-remote-control
+   pip install --upgrade nx100-remote-control
+   ```
+2. You can change robot parameters via importing nx100_remote_control.
    ```python
    import nx100_remote_control
    
@@ -63,7 +68,7 @@ Install
    
    nx100_remote_control.MOCK_RESPONSE = False  
    ```
-2. Import available contents like below examples or run web server. 
+3. Import available contents like below examples or run web server. 
     * Web interface opens from `http://localhost:8080/` which looks something like this in below image.
    ```python
    import nx100_remote_control
