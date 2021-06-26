@@ -4,6 +4,8 @@ This is used for development, individual command testing
 
 import nx100_remote_control
 from nx100_remote_control.module import Commands, WebServer
+import logging
+import os
 
 
 def callback_success():
@@ -15,10 +17,12 @@ def callback_failed():
 
 
 def start_app():
-    nx100_remote_control.MOCK_RESPONSE = True
-    WebServer.run(addr="localhost", port=8080)
+    logging.basicConfig(level=os.environ.get("LOGLEVEL", "INFO"))
 
-    # Commands.read_alarms()
+    nx100_remote_control.MOCK_RESPONSE = True
+    # WebServer.run(addr="localhost", port=8080)
+
+    Commands.read_alarms()
     # Commands.read_current_joint_coordinate_position()
     # Commands.read_current_specified_coordinate_system_position('0', '0')
     # Commands.read_status()

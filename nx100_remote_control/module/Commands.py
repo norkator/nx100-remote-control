@@ -1,5 +1,6 @@
 from nx100_remote_control.objects import Command, Status, JobDetail, CurrentPos, Alarm, Response
 from nx100_remote_control.module import Socket, Utils
+import logging
 import time
 
 
@@ -8,7 +9,7 @@ def read_alarms():
     request_alarms = Socket.exec_single_command(Command.Command("RALARM", ""))
     # Utils.print_response_details(request_alarms)
     alarms = Alarm.Alarm(request_alarms)
-    print('Alarms: ' + str(alarms.get_alarms()))
+    logging.info('Alarms: ' + str(alarms.get_alarms()))
     return alarms
 
 
@@ -38,20 +39,20 @@ def read_status():
     data_1 = Utils.decimal_to_binary(int(parts[0]))
     data_2 = Utils.decimal_to_binary(int(parts[1]))
     s = Status.Status(data_1, data_2)
-    print('Command remote: ' + str(s.is_command_remote()) + ', ' +
-          'Play: ' + str(s.is_play()) + ', ' +
-          'Teach ' + str(s.is_teach()) + ', ' +
-          'Safety speed operation: ' + str(s.is_safety_speed_operation()) + ', ' +
-          'Running: ' + str(s.is_running()) + ', ' +
-          'Auto: ' + str(s.is_auto()) + ', ' +
-          'One cycle: ' + str(s.is_one_cycle()) + ', ' +
-          'Step: ' + str(s.is_step()) + ', ' +
-          'Servo on: ' + str(s.is_servo_on()) + ', ' +
-          'Error occurring: ' + str(s.is_error_occurring()) + ', ' +
-          'Alarm occurring: ' + str(s.is_alarm_occurring()) + ', ' +
-          'Command hold: ' + str(s.is_command_hold()) + ', ' +
-          'External hold: ' + str(s.is_external_hold()) + ', ' +
-          'Programming pendant hold: ' + str(s.is_programming_pendant_hold()))
+    logging.info('Command remote: ' + str(s.is_command_remote()) + ', ' +
+                 'Play: ' + str(s.is_play()) + ', ' +
+                 'Teach ' + str(s.is_teach()) + ', ' +
+                 'Safety speed operation: ' + str(s.is_safety_speed_operation()) + ', ' +
+                 'Running: ' + str(s.is_running()) + ', ' +
+                 'Auto: ' + str(s.is_auto()) + ', ' +
+                 'One cycle: ' + str(s.is_one_cycle()) + ', ' +
+                 'Step: ' + str(s.is_step()) + ', ' +
+                 'Servo on: ' + str(s.is_servo_on()) + ', ' +
+                 'Error occurring: ' + str(s.is_error_occurring()) + ', ' +
+                 'Alarm occurring: ' + str(s.is_alarm_occurring()) + ', ' +
+                 'Command hold: ' + str(s.is_command_hold()) + ', ' +
+                 'External hold: ' + str(s.is_external_hold()) + ', ' +
+                 'Programming pendant hold: ' + str(s.is_programming_pendant_hold()))
     return s
 
 
@@ -65,11 +66,11 @@ def read_current_job_details():
 # Turns HOLD ON/OFF
 def write_hold(command):
     if command not in '1' and command not in '0':
-        print('[E] hold command can only be 1 (on) or 0 (off)')
+        logging.error('[E] hold command can only be 1 (on) or 0 (off)')
         return
     response = Response.Response(Socket.exec_single_command(Command.Command("HOLD", command)))
     Utils.print_response_details(response.get_response())
-    print('[i] hold command run successfully!' if response.is_success() else '[E] hold command run failed!')
+    logging.info('[i] hold command run successfully!' if response.is_success() else '[E] hold command run failed!')
     return response
 
 
@@ -77,7 +78,7 @@ def write_hold(command):
 def write_reset():
     response = Response.Response(Socket.exec_single_command(Command.Command("RESET", "")))
     Utils.print_response_details(response.get_response())
-    print('[i] reset command run successfully!' if response.is_success() else '[E] reset command run failed!')
+    logging.info('[i] reset command run successfully!' if response.is_success() else '[E] reset command run failed!')
     return response
 
 
@@ -85,18 +86,18 @@ def write_reset():
 def write_cancel():
     response = Response.Response(Socket.exec_single_command(Command.Command("CANCEL", "")))
     Utils.print_response_details(response.get_response())
-    print('[i] cancel command run successfully!' if response.is_success() else '[E] cancel command run failed!')
+    logging.info('[i] cancel command run successfully!' if response.is_success() else '[E] cancel command run failed!')
     return response
 
 
 # Turns servo power supply ON/OFF
 def write_servo_power(command):
     if command not in '1' and command not in '0':
-        print('[E] servo power command can only be 1 (on) or 0 (off)')
+        logging.error('[E] servo power command can only be 1 (on) or 0 (off)')
         return
     response = Response.Response(Socket.exec_single_command(Command.Command("SVON", command)))
     Utils.print_response_details(response.get_response())
-    print('[i] servo command run successfully!' if response.is_success() else '[E] servo command run failed!')
+    logging.info('[i] servo command run successfully!' if response.is_success() else '[E] servo command run failed!')
     return response
 
 
@@ -104,19 +105,20 @@ def write_servo_power(command):
 def write_start_job(job_name):
     response = Response.Response(Socket.exec_single_command(Command.Command("START", job_name)))
     Utils.print_response_details(response.get_response())
-    print('[i] start job command run successfully!' if response.is_success() else '[E] start job command run failed!')
+    logging.info(
+        '[i] start job command run successfully!' if response.is_success() else '[E] start job command run failed!')
     return response
 
 
 # Moves a manipulator to a specified coordinate position in linear motion
 def write_linear_move(move_l):
     move_cmd = move_l.get_command()
-    print('[i] move: ' + move_cmd)
+    logging.info('[i] move: ' + move_cmd)
     response = Response.Response(Socket.exec_single_command(
         Command.Command("MOVL", move_cmd)
     ))
     # Utils.print_response_details(response_data)
-    print('[i] command run successfully!' if response.is_success() else '[E] command run failed!')
+    logging.info('[i] command run successfully!' if response.is_success() else '[E] command run failed!')
     return response
 
 
@@ -150,7 +152,8 @@ def read_io_signals(io):
         Command.Command("IOREAD", io.get_io_read_command())
     ))
     Utils.print_response_details(response.get_response())
-    # print('[i] IO read command run successfully!' if response.is_success() else '[E] IO read command run failed!')
+    logging.info(
+        '[i] IO read command run successfully!' if response.is_success() else '[E] IO read command run failed!')
     return response
 
 
@@ -160,7 +163,8 @@ def write_io_signals(io):
         Command.Command("IOWRITE", io.get_io_write_command()))
     )
     Utils.print_response_details(response.get_response())
-    print('[i] IO write command run successfully!' if response.is_success() else '[E] IO write command run failed!')
+    logging.info(
+        '[i] IO write command run successfully!' if response.is_success() else '[E] IO write command run failed!')
     return response
 
 
@@ -170,8 +174,8 @@ def read_all_job_names():
         Command.Command("RJDIR", "*"))  # * means to read all registered jobs
     )
     Utils.print_response_details(response.get_response())
-    print('[i] Read job names command run successfully!' if response.is_success()
-          else '[E] Read job names command run failed!')
+    logging.info('[i] Read job names command run successfully!' if response.is_success()
+                 else '[E] Read job names command run failed!')
     return response
 
 
@@ -179,6 +183,6 @@ def read_all_job_names():
 def write_master_job(job_name):
     response = Response.Response(Socket.exec_single_command(Command.Command("SETMJ", job_name)))
     Utils.print_response_details(response.get_response())
-    print('[i] set master job command run successfully!' if response.is_success()
-          else '[E] set master job command run failed!')
+    logging.info('[i] set master job command run successfully!' if response.is_success()
+                 else '[E] set master job command run failed!')
     return response

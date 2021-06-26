@@ -1,6 +1,7 @@
 from http.server import HTTPServer, BaseHTTPRequestHandler
 from nx100_remote_control.objects import MoveL
 from nx100_remote_control.module import Commands, Utils
+import logging
 import os
 
 base_path = os.path.dirname(__file__)
@@ -62,8 +63,8 @@ class S(BaseHTTPRequestHandler):
     def do_POST(self):
         content_length = int(self.headers['Content-Length'])  # <--- Gets the size of data
         post_data = self.rfile.read(content_length)  # <--- Gets the data itself
-        # print("POST request,\nPath: %s\nHeaders:\n%s\n\nBody:\n%s\n",
-        #       str(self.path), str(self.headers), post_data.decode('utf-8'))
+        # logging.info("POST request,\nPath: %s\nHeaders:\n%s\n\nBody:\n%s\n", str(self.path), str(self.headers),
+        #             post_data.decode('utf-8'))
         command = post_data.decode("utf-8")
         if command == 'start_job':
             Commands.write_start_job('')
@@ -122,5 +123,5 @@ def run(server_class=HTTPServer, handler_class=S, addr="localhost", port=8080):
     server_address = (addr, port)
     httpd = server_class(server_address, handler_class)
 
-    print(f"Starting httpd server on {addr}:{port}")
+    logging.info(f"Starting httpd server on {addr}:{port}")
     httpd.serve_forever()

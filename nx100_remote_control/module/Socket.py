@@ -1,5 +1,6 @@
 import nx100_remote_control
 from nx100_remote_control.module import Utils, MockResponse
+import logging
 import socket
 
 CR = "\r"
@@ -24,19 +25,19 @@ def exec_single_command(command):
     start_response = repr(response)
     if 'OK: NX Information Server' not in start_response:
         client.close()
-        print('[E] Command start request response not ok!')
+        logging.error('[E] Command start request response not ok!')
         return
 
     # command request
     cmd_data_length = Utils.command_data_length(command)
     command_request = "HOSTCTRL_REQUEST " + command.name + " " + str(cmd_data_length) + CRLF
-    # print('Sending command: ' + command_request)
+    logging.info('Sending command: ' + command_request)
     client.send(command_request.encode())
     response = client.recv(4096)
     command_response = repr(response)
     if ('OK: ' + command.name) not in command_response:
         client.close()
-        print('[E] Command request response not ok!')
+        logging.error('[E] Command request response not ok!')
         return
 
     # command data request
@@ -53,4 +54,4 @@ def exec_single_command(command):
 
 # exec array of command objects
 def exec_multiple_commands(commands):
-    print('No implementation')
+    logging.info('No implementation')
