@@ -12,6 +12,7 @@ Table of contents
     * [Youtube videos](#youtube-videos)
 * [Infrastructure](#infrastructure)
 * [Install](#install)
+* [Lint, Test, Build](#lint-test-build)
 * [Programs](#programs)
 * [MoveL](#movel)
 * [Arduino gripper](#arduino-gripper)
@@ -77,6 +78,13 @@ Install
 
 ![web-interface-image](doc/web_img.png) 
 
+
+Lint, Test, Build
+============
+Must have installed: `pip install flake8 pytest`  
+Lint: `flake8 ./nx100_remote_control --count --select=E9,F63,F7,F82 --show-source --statistics`  
+Test: `pytest`  
+Build: `python -m build`  
 
 
 Programs
