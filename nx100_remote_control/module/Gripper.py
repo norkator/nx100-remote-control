@@ -1,5 +1,5 @@
-from module import Commands
-from objects import IO, Gripper
+from nx100_remote_control.module import Commands
+from nx100_remote_control.objects import IO, Gripper
 
 '''
 These signals are this repository end goal specific

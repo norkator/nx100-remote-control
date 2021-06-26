@@ -1,4 +1,4 @@
-from module import Utils, MockResponse
+from nx100_remote_control.module import Utils, MockResponse
 import socket
 
 # NX100 robot parameters

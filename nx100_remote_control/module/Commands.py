@@ -1,5 +1,5 @@
-from objects import Command, Status, JobDetail, CurrentPos, Alarm, Response
-from module import Socket, Utils
+from nx100_remote_control.objects import Command, Status, JobDetail, CurrentPos, Alarm, Response
+from nx100_remote_control.module import Socket, Utils
 import time
 
 

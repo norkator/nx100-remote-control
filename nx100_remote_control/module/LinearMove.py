@@ -2,7 +2,7 @@
 Commander class for linear moves
 """
 
-from module import Commands, Utils
+from nx100_remote_control.module import Commands, Utils
 import time
 
 

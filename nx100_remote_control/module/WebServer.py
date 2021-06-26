@@ -1,6 +1,6 @@
 from http.server import HTTPServer, BaseHTTPRequestHandler
-from objects import MoveL
-from module import Commands, Utils
+from nx100_remote_control.objects import MoveL
+from nx100_remote_control.module import Commands, Utils
 import os
 
 base_path = os.path.dirname(__file__)
