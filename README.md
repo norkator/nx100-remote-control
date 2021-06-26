@@ -53,9 +53,27 @@ This is planned infrastructure for robot project with computing server.<br>
 Install
 ============
 
-1. Go to `/module/Socket.py` and change `nx100_address` ip address to your network robot address.
-2. Set `/module/Socket.py` MOCK_RESPONSE variable to False for real robot use or use Mock to test without robot.
-3. Run app. Web interface opens from `http://localhost:8080/` which looks something like this:
+1. You can change robot parameters via importing nx100_remote_control.
+   ```python
+   import nx100_remote_control
+   
+   nx100_remote_control.NX100_IP_ADDRESS = '192.168.2.28'
+   nx100_remote_control.NX100_TCP_PORT = 80
+   
+   nx100_remote_control.MOCK_RESPONSE = False  
+   ```
+2. Import available contents like below examples or run web server. 
+    * Web interface opens from `http://localhost:8080/` which looks something like this in below image.
+   ```python
+   import nx100_remote_control
+   from nx100_remote_control.module import WebServer
+   
+   nx100_remote_control.MOCK_RESPONSE = True 
+   
+   WebServer.run(addr="localhost", port=8080)
+   ```
+   * Use MOCK_RESPONSE = True to run without attached robot.
+   * Replace "localhost" with "0.0.0.0" to make web server available to local network devices.
 
 ![web-interface-image](doc/web_img.png) 
 
