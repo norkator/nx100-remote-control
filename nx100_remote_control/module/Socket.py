@@ -1,11 +1,6 @@
+import nx100_remote_control
 from nx100_remote_control.module import Utils, MockResponse
 import socket
-
-# NX100 robot parameters
-nx100_address = "192.168.2.28"
-nx100_port = 80
-
-MOCK_RESPONSE = False
 
 CR = "\r"
 CRLF = "\r\n"
@@ -13,14 +8,14 @@ CRLF = "\r\n"
 
 # exec single command object
 def exec_single_command(command):
-    if MOCK_RESPONSE:
+    if nx100_remote_control.MOCK_RESPONSE:
         return Utils.clean_response(MockResponse.get_mock_response(command))
 
     client = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
     client.settimeout(5)
 
     # connect the client
-    client.connect((nx100_address, nx100_port))
+    client.connect((nx100_remote_control.NX100_IP_ADDRESS, nx100_remote_control.NX100_TCP_PORT))
 
     # start request
     start_request = "CONNECT Robot_access" + CRLF
