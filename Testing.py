@@ -2,8 +2,7 @@
 This is used for development, individual command testing
 """
 
-from module import Commands, Utils, Gripper, LinearMove
-from objects import MoveL, IO
+from nx100_remote_control.module import Commands
 
 
 def callback_success():

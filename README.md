@@ -75,8 +75,8 @@ Quick sample for MovL command to do linear movement with robot.
 See MoveL object for more details or read `Ethernet Server Function Manual`.
 
 ```python
-from module import Commands, Utils
-from objects import MoveL
+from nx100_remote_control.module import Commands, Utils
+from nx100_remote_control.objects import MoveL
 
 Commands.write_linear_move(MoveL.MoveL(
     MoveL.MoveL.motion_speed_selection_posture_speed,
@@ -93,8 +93,8 @@ Use MoveL.MoveL object to see options for `motion_speed_selection_` and for `coo
 Then to wait for move to be completed you can use callback function as example:
 
 ```python
-from module import Commands, Utils
-from objects import MoveL
+from nx100_remote_control.module import Commands, Utils
+from nx100_remote_control.objects import MoveL
 
 def callback_success():
     print('MoveL position has been reached')
@@ -122,8 +122,8 @@ So this will exec `_callback_success` if position reached in given timeout or ru
 Another commander class way
 
 ```python
-from module import LinearMove, Utils
-from objects import MoveL
+from nx100_remote_control.module import LinearMove, Utils
+from nx100_remote_control.objects import MoveL
     
 move_l = MoveL.MoveL(
     MoveL.MoveL.motion_speed_selection_posture_speed,
@@ -161,7 +161,7 @@ Python sample
 Work in progress with gripper.
 
 ```python
-from module import Gripper
+from nx100_remote_control.module import Gripper
 
 Gripper.write_gripper_close()
 Gripper.write_gripper_open()

@@ -2,7 +2,7 @@
 This is simple web server demo
 """
 
-from module import WebServer
+from nx100_remote_control.module import WebServer
 
 
 def start_app():

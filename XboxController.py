@@ -3,8 +3,8 @@ This is Xbox control sample
 """
 
 
-from module import xbox360_controller, Commands, Utils
-from objects import Time, MoveL
+from nx100_remote_control.module import xbox360_controller, Commands, Utils
+from nx100_remote_control.objects import Time, MoveL
 import pygame
 
 # define some colors
