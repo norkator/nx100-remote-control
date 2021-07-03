@@ -37,6 +37,9 @@ START = "b'0000\\r\\n'"
 MOVL = "b'0000\\r\\n'"
 
 # noinspection SpellCheckingInspection
+MOVJ = "b'0000\\r\\n'"
+
+# noinspection SpellCheckingInspection
 IOWRITE = "b'0\\r\\n'"
 
 # noinspection SpellCheckingInspection
@@ -66,6 +69,8 @@ def get_mock_response(command):
         return START
     elif command.name == 'MOVL':
         return MOVL
+    elif command.name == 'MOVJ':
+        return MOVJ
     elif command.name == 'IOWRITE':
         return IOWRITE
     elif command.name == 'IOREAD':

@@ -122,6 +122,17 @@ def write_linear_move(move_l):
     return response
 
 
+# Moves a manipulator to a specified coordinate position in joint motion.
+def write_joint_motion_move(move_j):
+    move_cmd = move_j.get_command()
+    logging.info('[i] move: ' + move_cmd)
+    response = Response.Response(Socket.exec_single_command(
+        Command.Command("MOVJ", move_cmd)
+    ))
+    logging.info('[i] command run successfully!' if response.is_success() else '[E] command run failed!')
+    return response
+
+
 # Is robot in target point function with callback. Timeout given in seconds
 def robot_in_target_point_callback(move_l, timeout=10, _callback_success=None, _callback_failed=None):
     current = 0

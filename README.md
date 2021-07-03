@@ -15,6 +15,7 @@ Table of contents
 * [Lint, Test, Build](#lint-test-build)
 * [Programs](#programs)
 * [MoveL](#movel)
+* [MoveJ](#movej)
 * [Arduino gripper](#arduino-gripper)
     * [Ladder changes](#ladder-changes)
     * [Python sample](#python-sample)
@@ -95,8 +96,7 @@ Build: `python -m build`
 Programs
 ============
 
-`Testing.py` => Used for development and testing individual commands.  
-`WebServer.py` => Hosts small web page having control possibilities (repository readme photo)  
+`Testing.py` => Used for development and testing individual commands.   
 `XboxController.py` => As name says, can use controller to control robot, just demo.  
 
 
@@ -170,6 +170,34 @@ linear_move = LinearMove.LinearMove()
 linear_move.go(move_l=move_l, wait=True, poll_limit_seconds=10)
 print('finished')
 ```
+
+
+MoveJ
+============
+Quick sample for MovJ command to do joint motion movement with robot. 
+Read `Ethernet Server Function Manual` for more details about MOVJ
+
+<font color="red">!!! BE CAREFUL WITH MOVJ COMMAND AND IT'S SPEED SETTING !!!</font>
+* Speed is given as percentage from 1 to 100.
+* Start running it with lower speed. 
+
+```python
+from nx100_remote_control.module import JointMove, Utils
+from nx100_remote_control.objects import MoveJ
+    
+move_j = MoveJ.MoveJ(
+    25,  # speed %
+    MoveJ.MoveJ.coordinate_specification_base_coordinate,
+    352.769, 202.779, 120.658,
+    -1.34, 35.78, 27.84,
+    Utils.binary_to_decimal(0x00000001),
+    0, 0, 0, 0, 0, 0, 0
+)
+linear_move = JointMove.JointMove()
+linear_move.go(move_j=move_j, wait=True, poll_limit_seconds=10)
+print('finished')
+```
+
 
 Arduino gripper
 ============
