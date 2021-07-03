@@ -177,7 +177,9 @@ MoveJ
 Quick sample for MovJ command to do joint motion movement with robot. 
 Read `Ethernet Server Function Manual` for more details about MOVJ
 
-<font color="red">!!! BE CAREFUL WITH MOVJ COMMAND AND IT'S SPEED SETTING !!!</font>
+```diff
+- !!! BE CAREFUL WITH MOVJ COMMAND AND IT'S SPEED SETTING !!!
+```
 * Speed is given as percentage from 1 to 100.
 * Start running it with lower speed. 
 
