@@ -2,10 +2,10 @@
 This is used for development, individual command testing
 """
 
-import src.nx100_remote_control
-from src.nx100_remote_control.module import Commands, WebServer, Utils, JointMove
-from src.nx100_remote_control.objects import MoveJ
-from src.nx100_remote_control.objects import MoveJ
+import nx100_remote_control
+from nx100_remote_control.module import Commands, WebServer, Utils, JointMove
+from nx100_remote_control.objects import MoveJ
+from nx100_remote_control.objects import MoveJ
 import logging
 import os
 
@@ -21,10 +21,10 @@ def callback_failed():
 def start_app():
     logging.basicConfig(level=os.environ.get("LOGLEVEL", "INFO"))
 
-    src.nx100_remote_control.MOCK_RESPONSE = True
+    nx100_remote_control.MOCK_RESPONSE = True
     # WebServer.run(addr="localhost", port=8080)
 
-    Commands.read_alarms()
+    # Commands.read_alarms()
     # Commands.read_current_joint_coordinate_position()
     # Commands.read_current_specified_coordinate_system_position('0', '0')
     # Commands.read_status()
