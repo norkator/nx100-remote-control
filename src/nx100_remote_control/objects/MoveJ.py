@@ -1,5 +1,11 @@
 class MoveJ(object):
 
+    """
+    !!! WARNING !!!
+    !!! motion_speed_percentage 100% could be dangerous !!!
+    !!! robot can do very quick movements !!!
+    """
+
     # coordinate_specification options
     coordinate_specification_base_coordinate = 0  # base coordinate option
     coordinate_specification_robot_coordinate = 1  # robot coordinate option

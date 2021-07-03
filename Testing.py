@@ -2,8 +2,10 @@
 This is used for development, individual command testing
 """
 
-import nx100_remote_control
-from nx100_remote_control.module import Commands, WebServer
+import src.nx100_remote_control
+from src.nx100_remote_control.module import Commands, WebServer, Utils, JointMove
+from src.nx100_remote_control.objects import MoveJ
+from src.nx100_remote_control.objects import MoveJ
 import logging
 import os
 
@@ -19,7 +21,7 @@ def callback_failed():
 def start_app():
     logging.basicConfig(level=os.environ.get("LOGLEVEL", "INFO"))
 
-    nx100_remote_control.MOCK_RESPONSE = True
+    src.nx100_remote_control.MOCK_RESPONSE = True
     # WebServer.run(addr="localhost", port=8080)
 
     Commands.read_alarms()
@@ -80,6 +82,17 @@ def start_app():
     # linear_move = LinearMove.LinearMove()
     # linear_move.go(move_l=move_l, wait=True, poll_limit_seconds=10)
     # print('finished')
+
+    move_j = MoveJ.MoveJ(
+        25,  # speed %
+        MoveJ.MoveJ.coordinate_specification_base_coordinate,
+        352.769, 202.779, 120.658,
+        -1.34, 35.78, 27.84,
+        Utils.binary_to_decimal(0x00000001),
+        0, 0, 0, 0, 0, 0, 0
+    )
+    linear_move = JointMove.JointMove()
+    linear_move.go(move_j=move_j, wait=True, poll_limit_seconds=10)
 
 
 start_app()
