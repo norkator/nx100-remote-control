@@ -23,6 +23,7 @@ class JointMove(object):
         """
         self.stopped = False
         Commands.write_hold('0')  # disable hold if currently enabled
+        Commands.write_joint_motion_move(move_j=move_j)  # execute wanted move command
         current = 0
         if not wait:
             return True

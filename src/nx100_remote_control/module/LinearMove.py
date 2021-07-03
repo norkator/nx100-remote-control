@@ -23,6 +23,7 @@ class LinearMove(object):
         """
         self.stopped = False
         Commands.write_hold('0')  # disable hold if currently enabled
+        Commands.write_linear_move(move_l=move_l)  # execute wanted move command
         current = 0
         if not wait:
             return True
