@@ -45,6 +45,12 @@ IOWRITE = "b'0\\r\\n'"
 # noinspection SpellCheckingInspection
 IOREAD = "b'0\\r\\n'"
 
+# noinspection SpellCheckingInspection
+RJDIR = ""
+
+# noinspection SpellCheckingInspection
+SETMJ = "b'0000\\r\\n'"
+
 
 def get_mock_response(command):
     if command.name == 'RALARM':
@@ -75,5 +81,9 @@ def get_mock_response(command):
         return IOWRITE
     elif command.name == 'IOREAD':
         return IOREAD
+    elif command.name == 'RJDIR':
+        return RJDIR
+    elif command.name == 'SETMJ':
+        return SETMJ
     else:
         return '[E] no mock response for given command ' + command.name
