@@ -95,8 +95,7 @@ Build: `python -m build`
 Programs
 ============
 
-`Testing.py` => Used for development and testing individual commands.  
-`WebServer.py` => Hosts small web page having control possibilities (repository readme photo)  
+`Testing.py` => Used for development and testing individual commands.   
 `XboxController.py` => As name says, can use controller to control robot, just demo.  
 
 
