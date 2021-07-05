@@ -57,20 +57,36 @@ NX100 Configs
 ```diff
 - Do changes with your own risk! in case you brick your robot or your setup is different and it doesn't work. I cannot help.
 ```
-1. Log into NX100 with Yaskawa master password from security menu. Same menu as you use to login to maintenance mode.
+1. Log into NX100 with Yaskawa emperor password from security menu. Same menu as you use to login to maintenance mode.
+   ```
+   System info -> Security -> Select Management Mode ->
+   But do not enter Management Mode password but instead Yaskawa emperor password.
+   ```
+   Do your own research to find required password.
 2. Enable following FD parameters  
    All supported parameters list: [NX100 / NXC100 PARAMETER LIST](https://drive.google.com/file/d/1YA_C3Vg_eh7pp0q-liEpeXLgl6D-lV0I/view?usp=sharing)
    ```
-   FD 78 => bit set to 1 (Ethernet WWW)
+   FD078 => bit set to 1 (Ethernet WWW)
    ```
 3. Connect ethernet cable.
    ```
-   ... todo... location image here
+   LAN0 (next to serial COM port) 
    ```
+   LAN1 should be occupied by default, that wire goes to pendant.
+   ![pc-cards](doc/nx100_cards.jpg)
 4. Specify ethernet configuration ip, mask, default gateway.
    ```
-   ... todo... link documentation here
+   1. Power off NX100 -> press down pendant "MAIN MENU" button while powering on NX100
+   2. Release "MAIN MENU" after seeing Motoman screen on pendant.
+   3. Login with Yaskawa emperor password from System -> Security.
+   4. SYSTEM -> SETUP -> OPTION FUNCTION -> TCP -> "USED"
+   5. SYSTEM -> SETUP -> OPTION FUNCTION -> NETWORK -> Give details.
+   6. Under network also find HOST SETUP -> Provide address details.
+   7. See that your changes have been saved.
+   8. Reboot NX100 and ping your NX100 ip address.
+   9. Test out this library.
    ```
+
 
 Install
 ============
