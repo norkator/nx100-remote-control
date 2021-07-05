@@ -57,16 +57,19 @@ NX100 Configs
 ```diff
 - Do changes with your own risk! in case you brick your robot or your setup is different and it doesn't work. I cannot help.
 ```
-1. Log into NX100 with Yaskawa master password from security menu. Same as you use to login to maintenance mode.
+1. Log into NX100 with Yaskawa master password from security menu. Same menu as you use to login to maintenance mode.
 2. Enable following FD parameters
    ```
    todo.. add parameters here + docs
    ```
 3. Connect ethernet cable.
+   ```
    ... todo... location image here
-5. Specify ethernet configuration ip, mask, default gateway.
+   ```
+4. Specify ethernet configuration ip, mask, default gateway.
+   ```
    ... todo... link documentation here
-
+   ```
 
 Install
 ============
