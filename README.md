@@ -11,6 +11,7 @@ Table of contents
 * [Documents](#documents)
     * [Youtube videos](#youtube-videos)
 * [Infrastructure](#infrastructure)
+* [NX100 Configs](#nx100-configs)
 * [Install](#install)
 * [Lint, Test, Build](#lint-test-build)
 * [Programs](#programs)
@@ -50,6 +51,21 @@ Infrastructure
 This is planned infrastructure for robot project with computing server.<br>
 ![infra-image](doc/hardware_network.png) 
 
+
+NX100 Configs
+============
+```diff
+- Do changes with your own risk! in case you brick your robot or your setup is different and it doesn't work. I cannot help.
+```
+1. Log into NX100 with Yaskawa master password from security menu. Same as you use to login to maintenance mode.
+2. Enable following FD parameters
+   ```
+   todo.. add parameters here + docs
+   ```
+3. Connect ethernet cable.
+   ... todo... location image here
+5. Specify ethernet configuration ip, mask, default gateway.
+   ... todo... link documentation here
 
 
 Install
