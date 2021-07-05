@@ -32,7 +32,7 @@ class LinearMove(object):
                 return False
             time.sleep(1)
             cp = Commands.read_current_specified_coordinate_system_position(  # returns CurrentPos object
-                str(move_l.get_coordinate_specification), '0'
+                str(move_l.get_coordinate_specification()), '0'
             )
             if Utils.is_in_position(move_l, cp):
                 return True

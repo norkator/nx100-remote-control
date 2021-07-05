@@ -32,7 +32,7 @@ class JointMove(object):
                 return False
             time.sleep(1)
             cp = Commands.read_current_specified_coordinate_system_position(  # returns CurrentPos object
-                str(move_j.get_coordinate_specification), '0'
+                str(move_j.get_coordinate_specification()), '0'
             )
             if Utils.is_in_position(move_j, cp):
                 return True
