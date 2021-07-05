@@ -47,8 +47,14 @@ def clean_response(response):
         .replace('\\r\\n\'', '')
 
 
+def equivalent(a, b, tolerance):
+    return abs(a - b) < tolerance
+
+
 # noinspection DuplicatedCode
 def is_in_position(move_l, cp):
-    return cp.get_x() == move_l.get_x() and cp.get_y() == move_l.get_y() \
-           and cp.get_z() == move_l.get_z() and cp.get_tx() == move_l.get_tx() \
-           and cp.get_ty() == move_l.get_ty() and cp.get_tz() == move_l.get_tz()
+    t = 0.01  # tolerance x,y,z
+    t2 = 0.1  # tolerance tx, ty, tz
+    return equivalent(cp.get_x(), move_l.get_x(), t) and equivalent(cp.get_y(), move_l.get_y(), t) and equivalent(
+        cp.get_z(), move_l.get_z(), t) and equivalent(cp.get_tx(), move_l.get_tx(), t2) \
+           and equivalent(cp.get_ty(), move_l.get_ty(), t2) and equivalent(cp.get_tz(), move_l.get_tz(), t2)
