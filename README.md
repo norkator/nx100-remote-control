@@ -58,9 +58,10 @@ NX100 Configs
 - Do changes with your own risk! in case you brick your robot or your setup is different and it doesn't work. I cannot help.
 ```
 1. Log into NX100 with Yaskawa master password from security menu. Same menu as you use to login to maintenance mode.
-2. Enable following FD parameters
+2. Enable following FD parameters  
+   All supported parameters list: [NX100 / NXC100 PARAMETER LIST](https://drive.google.com/file/d/1YA_C3Vg_eh7pp0q-liEpeXLgl6D-lV0I/view?usp=sharing)
    ```
-   todo.. add parameters here + docs
+   FD 78 => bit set to 1 (Ethernet WWW)
    ```
 3. Connect ethernet cable.
    ```
