@@ -21,7 +21,7 @@ def callback_failed():
 def start_app():
     logging.basicConfig(level=os.environ.get("LOGLEVEL", "INFO"))
 
-    nx100_remote_control.MOCK_RESPONSE = True
+    nx100_remote_control.MOCK_RESPONSE = False
     # WebServer.run(addr="localhost", port=8080)
 
     # Commands.read_alarms()
@@ -83,16 +83,26 @@ def start_app():
     # linear_move.go(move_l=move_l, wait=True, poll_limit_seconds=10)
     # print('finished')
 
+    position = Commands.read_current_specified_coordinate_system_position('0')
+
+    sp = [-70.888, 836.813, 281.496, 0.21, 36.59, 90.14]
+    # 542.553,-229.522,416.749,12.32,6.74,-27.25,0,0
+    # -70.888,836.813,281.496,0.21,36.59,90.14,0,0
+
+    """
+    print('before movj move')
     move_j = MoveJ.MoveJ(
-        25,  # speed %
+        5,  # speed %
         MoveJ.MoveJ.coordinate_specification_base_coordinate,
-        352.769, 202.779, 120.658,
-        -1.34, 35.78, 27.84,
+        sp[0], sp[1], sp[2],
+        sp[3], sp[4], sp[5],
         Utils.binary_to_decimal(0x00000001),
         0, 0, 0, 0, 0, 0, 0
     )
     linear_move = JointMove.JointMove()
     linear_move.go(move_j=move_j, wait=True, poll_limit_seconds=10)
+    print('finished movj move')
+    """
 
 
 start_app()
