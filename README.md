@@ -41,9 +41,10 @@ Documents for development
 Youtube videos
 -----
 These videos are part of documentation.
-* [Youtube first demo promo](https://youtu.be/9swshogfL1c) related to remote control software side.
-* [Custom hardware Gripper](https://youtu.be/Cx4sLZeZK_E) related to first test of working gripper.
+* [First demo promo](https://youtu.be/9swshogfL1c) related to remote control software side.
+* [Custom hardware gripper](https://youtu.be/Cx4sLZeZK_E) related to first test of working gripper.
 * [Calibrating and testing ML pipeline](https://youtu.be/NBE9e7AJw6I) related to first tests with machine learning based control.
+* [Grasping demo](https://youtu.be/nW2mAJsRXbo) Grasping demo. Using MOVL and MOVJ commands.
 
 
 Infrastructure
