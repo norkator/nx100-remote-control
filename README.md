@@ -134,8 +134,8 @@ Programs
 ============
 
 `Testing.py` => Used for development and testing individual commands.   
-`XboxController.py` => As name says, can use controller to control robot, just demo. Notes that movements are clunky 
-because this model robot does not support real time controlling.
+`XboxController.py` => As name says, can use controller to control robot, just demo. Note that movements are clunky 
+because NX100 does not support real time controlling.
 
 
 MoveL
