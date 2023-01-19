@@ -1,5 +1,7 @@
 # Motoman NX100 - Remote Control
 
+![lint-test-status](https://github.com/norkator/nx100-remote-control/actions/workflows/python-app.yml/badge.svg)
+
 Yaskawa Motoman NX100 industrial robot remote control Python library. This library was originally
 developed for machine vision control development project. See more
 at [Youtube demo video](https://youtu.be/9swshogfL1c).
