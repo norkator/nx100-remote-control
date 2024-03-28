@@ -8,7 +8,7 @@
   "license": "MIT",
   "private": true,
   "dependencies": {
-    "express": "4.17.3",
+    "express": "4.19.2",
     "raspi": "6.0.1",
     "raspi-i2c": "6.2.4"
   }
